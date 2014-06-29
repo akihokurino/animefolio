@@ -23,22 +23,34 @@ namespace :get do
 		end
 
 		def get_basic(url)
-			html = open(url){ |f| f.read }
-			doc = Nokogiri::HTML.parse(html.toutf8, nil, "UTF-8")
-			doc.css(".aniSto img").each do |node|
-				p node.attributes["src"].value if node.name == "img"
+			begin
+				html = open(url){ |f| f.read }
+			rescue Exception
+				return
 			end
+
+			title = nil
+			description = nil
+			thumbnail = nil
+
+			doc = Nokogiri::HTML.parse(html.toutf8, nil, "UTF-8")
 			doc.css(".aniSto h3").each do |node|
-				p node.children.text if node.name == "h3"
+				title = node.children.text if node.name == "h3"
 			end
 			doc.css(".aniSto p.Txt2").each do |node|
-				p node.children.text if node.name == "p"
+				description = node.children.text if node.name == "p"
+			end
+			doc.css(".aniSto img").each do |node|
+				thumbnail = node.attributes["src"].value if node.name == "img"
 			end
 
-			crawl_list(doc)
+			p "#{title} 開始"
+
+			film_id = Film.find_or_create(title, description, thumbnail)
+			crawl_list(doc, film_id)
 		end
 
-		def crawl_list(doc)
+		def crawl_list(doc, film_id)
 			exists_list = false
 			catch :double_loop do
 				doc.css("#more > div").each do |node|
@@ -49,11 +61,11 @@ namespace :get do
 
 						exists_list = true
 						node.css(".Mov_cnt .Mov_lst .Mov_ttl a").each do |node|
-							#p node.attributes["href"].value
+							url = node.attributes["href"].value
 							#p node.children.text
-							html = open(node.attributes["href"].value){ |f| f.read }
+							html = open(url){ |f| f.read }
 							doc = Nokogiri::HTML.parse(html.toutf8, nil, "UTF-8")
-							crawl_list(doc)
+							crawl_list(doc, film_id)
 						end
 
 						break
@@ -62,29 +74,34 @@ namespace :get do
 			end
 
 			unless exists_list
-				get_details(doc)
+				get_details(doc, film_id)
 			end
 		end
 
-		def get_details(doc)
+		def get_details(doc, film_id)
 			doc.css("#more > div").each do |node|
+				title = nil
+				content_id = nil
+
 				if node.attributes["class"] && node.attributes["class"].value == "aniTabA"
 					node.css(".Txt4").each do |node|
-						p node.children.text
+						title = node.children.text
+						content_id = Content.find_or_create(title, film_id)
 					end
 					node.css("ul#tab1 li a").each do |node|
-						get_links(node)
+						get_links(node, content_id)
 					end
 				end
 				if node.attributes["class"] && node.attributes["class"].value == "aniTabB"
 					doc.css("#more > div.aniTabB > div").each_with_index do |node, index|
 						if node.attributes["class"] && node.attributes["class"].value == "Tab_hed"
-							p node.children.children.text
+							title = node.children.children.text
+							content_id = Content.find_or_create(title, film_id)
 						end
 
 						if node.attributes["class"] && node.attributes["class"].value =~ /Tab_cnt/
 							node.css("ul li a").each do |node|
-								get_links(node)
+								get_links(node, content_id)
 							end
 						end
 					end
@@ -92,35 +109,48 @@ namespace :get do
 				if node.attributes["class"] && node.attributes["class"].value == "aniTabC"
 					doc.css("#more > div.aniTabC > div").each_with_index do |node, index|
 						if node.attributes["class"] && node.attributes["class"].value == "Tab_hed"
-							p node.children.children.text
+							title = node.children.children.text
+							content_id = Content.find_or_create(title, film_id)
 						end
 
 						if node.attributes["class"] && node.attributes["class"].value =~ /Tab_cnt/
 							node.css("ul li a").each do |node|
-								get_links(node)
+								get_links(node, content_id)
 							end
 						end
 					end
 				end
 			end
+
+			p "正常に終了"
 		end
 
-		def get_links(node)
+		def get_links(node, content_id)
 			case node.children.text
 			when "AUE"
-				p node.attributes["href"].value
+				title = node.children.text
+				url = node.attributes["href"].value
 			when "Trollvid"
-				p node.attributes["href"].value
+				title = node.children.text
+				url = node.attributes["href"].value
 			when "VFun"
-				p node.attributes["href"].value
+				title = node.children.text
+				url = node.attributes["href"].value
 			when "AniTube"
-				p node.attributes["href"].value
+				title = node.children.text
+				url = node.attributes["href"].value
 			when "MP4up"
-				p node.attributes["href"].value
+				title = node.children.text
+				url = node.attributes["href"].value
 			when "Hash"
-				p node.attributes["href"].value
+				title = node.children.text
+				url = node.attributes["href"].value
 			when "Zunux"
-				p node.attributes["href"].value
+				title = node.children.text
+				url = node.attributes["href"].value
+			end
+			if !title.nil? && !url.nil?
+				Link.create_or_update(content_id, title, url)
 			end
 		end
 
