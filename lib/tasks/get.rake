@@ -61,13 +61,29 @@ namespace :get do
 					end
 				end
 				if node.attributes["class"] && node.attributes["class"].value == "aniTabB"
+					doc.css("#more > div.aniTabB > div").each_with_index do |node, index|
+						if node.attributes["class"] && node.attributes["class"].value == "Tab_hed"
+							p node.children.children.text
+						end
+
+						if node.attributes["class"] && node.attributes["class"].value =~ /Tab_cnt/
+							node.css("ul li a").each do |node|
+								get_links(node)
+							end
+						end
+					end
 				end
 				if node.attributes["class"] && node.attributes["class"].value == "aniTabC"
-					node.css(".Tab_hed > p.Txt4").each do |node|
-						p node.children.text
-					end
-					node.css(".Tab_cntB ul li a").each do |node|
-						get_links(node)
+					doc.css("#more > div.aniTabC > div").each_with_index do |node, index|
+						if node.attributes["class"] && node.attributes["class"].value == "Tab_hed"
+							p node.children.children.text
+						end
+
+						if node.attributes["class"] && node.attributes["class"].value =~ /Tab_cnt/
+							node.css("ul li a").each do |node|
+								get_links(node)
+							end
+						end
 					end
 				end
 			end
@@ -92,6 +108,6 @@ namespace :get do
 			end
 		end
 
-		get_basic("http://animepost.blog.fc2.com/blog-entry-3211.html")
+		get_basic("http://animepost.blog.fc2.com/blog-entry-2130.html")
   	end
 end
