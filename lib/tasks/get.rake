@@ -6,17 +6,33 @@ namespace :get do
 		require 'nokogiri'
 		require 'kconv'
 
+		def crawl_hiragana(url)
+			html = open(url){ |f| f.read }
+			doc = Nokogiri::HTML.parse(html.toutf8, nil, "UTF-8")
+			doc.css(".aniTtl .Ttl_btnA a").each do |node|
+				crawl_title(node.attributes["href"].value)
+			end
+		end
+
+		def crawl_title(url)
+			html = open(url){ |f| f.read }
+			doc = Nokogiri::HTML.parse(html.toutf8, nil, "UTF-8")
+			doc.css(".entry_body .sl_l a").each do |node|
+				get_basic(node.attributes["href"].value)
+			end
+		end
+
 		def get_basic(url)
 			html = open(url){ |f| f.read }
 			doc = Nokogiri::HTML.parse(html.toutf8, nil, "UTF-8")
 			doc.css(".aniSto img").each do |node|
-				#p node.attributes["src"].value if node.name == "img"
+				p node.attributes["src"].value if node.name == "img"
 			end
 			doc.css(".aniSto h3").each do |node|
-				#p node.children.text if node.name == "h3"
+				p node.children.text if node.name == "h3"
 			end
 			doc.css(".aniSto p.Txt2").each do |node|
-				#p node.children.text if node.name == "p"
+				p node.children.text if node.name == "p"
 			end
 
 			crawl_list(doc)
@@ -54,7 +70,7 @@ namespace :get do
 			doc.css("#more > div").each do |node|
 				if node.attributes["class"] && node.attributes["class"].value == "aniTabA"
 					node.css(".Txt4").each do |node|
-						#p node.children.text
+						p node.children.text
 					end
 					node.css("ul#tab1 li a").each do |node|
 						get_links(node)
@@ -108,6 +124,6 @@ namespace :get do
 			end
 		end
 
-		get_basic("http://animepost.blog.fc2.com/blog-entry-2130.html")
+		crawl_hiragana("http://animepost.blog.fc2.com")
   	end
 end
