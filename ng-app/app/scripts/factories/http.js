@@ -15,10 +15,10 @@ angular.module("animefolio").factory("http", ["$http", "$rootScope", function ($
 	}
 
 	return {
-		getFilms: function () {
-			http(HOST + "/films", "GET", {},
+		getFilms: function (scope_api, page_num) {
+			http(HOST + "/films?page_num=" + page_num, "GET", {},
 				function (data, status, headers, config) {
-					console.log(data);
+					scope_api.films = data.films;
 				},
 				function (data, status, headers, config) {
 					console.log("error");

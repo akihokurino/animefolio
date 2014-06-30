@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20140629075055) do
     t.string   "title"
     t.text     "description"
     t.string   "thumbnail"
+    t.string   "first_letter"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

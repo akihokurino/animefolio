@@ -10,33 +10,31 @@ namespace :get do
 			html = open(url){ |f| f.read }
 			doc = Nokogiri::HTML.parse(html.toutf8, nil, "UTF-8")
 			doc.css(".aniTtl .Ttl_btnA a").each do |node|
-				crawl_title(node.attributes["href"].value)
+				first_letter = node.text
+				crawl_title(node.attributes["href"].value, first_letter)
 			end
 		end
 
-		def crawl_title(url)
+		def crawl_title(url, first_letter)
 			html = open(url){ |f| f.read }
 			doc = Nokogiri::HTML.parse(html.toutf8, nil, "UTF-8")
 			doc.css(".entry_body .sl_l a").each do |node|
-				get_basic(node.attributes["href"].value)
+				title = node.text
+				get_basic(node.attributes["href"].value, title, first_letter)
 			end
 		end
 
-		def get_basic(url)
+		def get_basic(url, title, first_letter)
 			begin
 				html = open(url){ |f| f.read }
 			rescue Exception
 				return
 			end
 
-			title = nil
 			description = nil
 			thumbnail = nil
 
 			doc = Nokogiri::HTML.parse(html.toutf8, nil, "UTF-8")
-			doc.css(".aniSto h3").each do |node|
-				title = node.children.text if node.name == "h3"
-			end
 			doc.css(".aniSto p.Txt2").each do |node|
 				description = node.children.text if node.name == "p"
 			end
@@ -46,7 +44,7 @@ namespace :get do
 
 			p "#{title} 開始"
 
-			film_id = Film.find_or_create(title, description, thumbnail)
+			film_id = Film.find_or_create(title, description, thumbnail, first_letter)
 			crawl_list(doc, film_id)
 		end
 
@@ -62,7 +60,6 @@ namespace :get do
 						exists_list = true
 						node.css(".Mov_cnt .Mov_lst .Mov_ttl a").each do |node|
 							url = node.attributes["href"].value
-							#p node.children.text
 							html = open(url){ |f| f.read }
 							doc = Nokogiri::HTML.parse(html.toutf8, nil, "UTF-8")
 							crawl_list(doc, film_id)

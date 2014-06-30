@@ -4,6 +4,7 @@ class CreateFilms < ActiveRecord::Migration
       t.string :title
       t.text :description
       t.string :thumbnail
+      t.string :first_letter
 
       t.timestamps
     end

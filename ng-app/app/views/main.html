@@ -1,2 +1,6 @@
 <div class="main-page" ng-init="initialize()">
+	<a href="#" class="film" ng-repeat="film in api.films track by $index">
+		<img ng-src="{{film.thumbnail}}" />
+		<p class="title">{{film.title}}</p>
+	</a>
 </div>
