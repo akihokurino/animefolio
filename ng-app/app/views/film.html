@@ -1,0 +1,18 @@
+<div class="menu" ng-include="'partials/menu.html'"></div>
+<div class="contents-page" ng-init="initialize()">
+	<div class="basic">
+		<img ng-src="{{api.film.thumbnail}}">
+		<div class="body">
+			<h2 class="title">{{api.film.title}}</h2>
+			<p class="description">{{api.film.description}}</p>
+		</div>
+	</div>
+	<ul class="story-list">
+		<li ng-repeat="content in api.film.contents track by $index">
+			<span class="badge"></span>
+			<a href="#/content/{{content.id}}">
+				{{strimWidth(content.title, 55)}}
+			</a>
+		</li>
+	</ul>
+</div>

@@ -1,4 +1,6 @@
 class Link < ActiveRecord::Base
+	belongs_to :content
+
 	class << self
 		def create_or_update(content_id, title, url)
 			unless self.exists?(title: title, url: url)

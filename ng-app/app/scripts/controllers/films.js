@@ -2,13 +2,13 @@
 
 /**
  * @ngdoc function
- * @name animefolio.controller:MainCtrl
+ * @name animefolio.controller:FilmsCtrl
  * @description
- * # MainCtrl
+ * # FilmsCtrl
  * Controller of the animefolio
  */
 
-angular.module("animefolio").controller("MainCtrl", function ($scope, $location, http) {
+angular.module("animefolio").controller("FilmsCtrl", function ($scope, $location, http) {
 	$scope.api = {
 		films: []
 	};

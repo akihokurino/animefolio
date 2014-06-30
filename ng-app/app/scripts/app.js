@@ -20,8 +20,12 @@ angular.module('animefolio', [
 .config(function ($routeProvider) {
 	$routeProvider
 	.when('/', {
-		templateUrl: 'views/main.html',
-		controller: 'MainCtrl'
+		templateUrl: 'views/films.html',
+		controller: 'FilmsCtrl'
+	})
+	.when('/contents/:film_id', {
+		templateUrl: 'views/film.html',
+		controller: 'FilmCtrl'
 	})
 	.otherwise({
 		redirectTo: '/'

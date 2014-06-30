@@ -1,4 +1,7 @@
 class Content < ActiveRecord::Base
+	belongs_to :film
+	has_many :links
+
 	class << self
 		def find_or_create(title, film_id)
 			unless self.exists?(title: title)

@@ -69,11 +69,12 @@ header {
 	z-index: 10;
 	.inner-header {
 		width: 100%;
+		min-width: 768px;
 		height: 100%;
 		margin: 0 auto;
 		position: relative;
 		.search {
-			width: 280px;
+			width: 265px;
 			overflow: hidden;
 			position: absolute;
 			top: 8px;
@@ -84,7 +85,7 @@ header {
 				font-size: 12px;
 			}
 			.submit-btn {
-				@include btn(70px, 30px);
+				@include btn(55px, 30px);
 				float: right;
 			}
 		}
@@ -102,7 +103,7 @@ header {
 	width: 100%;
 	padding-top: 65px;
 	overflow: hidden;
-	.main-page {
+	.films-page {
 		float: right;
 		margin: 0 0 0 -210px;
 		width: 100%;
@@ -131,6 +132,62 @@ header {
 			text-align: center;
 			img {
 				width: 40px;
+			}
+		}
+	}
+	.contents-page {
+		width: 800px;
+		margin: 0 auto;
+		.basic {
+			width: 100%;
+			overflow: hidden;
+			background-color: $film_color;
+			padding: 10px;
+			box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
+			margin-bottom: 20px;
+			img {
+				width: 270px;
+				display: block;
+				float: left;
+				margin-right: 10px;
+			}
+			.body {
+				width: 490px;
+				float: right;
+				.title {
+					font-size: 18px;
+					margin-bottom: 20px;
+				}
+				.description {
+					font-size: 16px;
+					line-height: 22px;
+				}
+			}
+		}
+		.story-list {
+			li {
+				width: 100%;
+				height: 40px;
+				line-height: 40px;
+				box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
+				background-color: $film_color;
+				font-size: 16px;
+				margin-bottom: 10px;
+				position: relative;
+				.badge {
+					background-color: $main_color;
+					width: 5px;
+					height: 100%;
+					display: inline-block;
+					position: absolute;
+					top: 0px;
+					left: 0px;
+				}
+				a {
+					padding-left: 20px;
+					display: block;
+					color: $main_color;
+				}
 			}
 		}
 	}

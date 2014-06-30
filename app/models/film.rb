@@ -1,4 +1,6 @@
 class Film < ActiveRecord::Base
+	has_many :contents
+
 	scope :search_by_keyword, -> (keyword) {
 		where(["title like ?", "%#{keyword}%"])
 	}

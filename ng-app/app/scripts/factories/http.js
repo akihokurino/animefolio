@@ -57,6 +57,17 @@ angular.module("animefolio").factory("http", ["$http", "$rootScope", function ($
 					console.log("error");
 				}
 			)
+		},
+		getFilm: function (scope_api, film_id) {
+			http(HOST + "/films/" + film_id, "GET", {},
+				function (data, status, headers, config) {
+					scope_api.film = data.film;
+					console.log(scope_api);
+				},
+				function (data, status, headers, config) {
+					console.log("error");
+				}
+			)
 		}
 	}
 }])

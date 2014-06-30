@@ -20,7 +20,12 @@ angular.module("animefolio").controller("MenuCtrl", function ($scope, $location)
 		var letter = $location.search().letter;
 		var keyword = $location.search().keyword;
 		if(!letter && !keyword) {
-			return "selected";
+			var url_array = $location.path().split("/");
+			var id = url_array.pop();
+			var page = url_array.pop();
+			if(page != "contents"){
+				return "selected";
+			}
 		}
 	}
 });

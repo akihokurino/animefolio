@@ -2,8 +2,11 @@ class FilmsController < ApplicationController
 	before_action :pagenation, only: [:index]
 
 	def index
-		p "test"
 		@films = Film.get_associated(@offset_num, @get_num, params[:letter], params[:keyword])
+	end
+
+	def show
+		@film = Film.find(params[:id])
 	end
 
 	private
