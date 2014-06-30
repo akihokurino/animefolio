@@ -44,15 +44,15 @@ header {
 	position: fixed;
 	z-index: 10;
 	.inner-header {
-		width: 960px;
+		width: 100%;
 		height: 100%;
 		margin: 0 auto;
 		position: relative;
 		input {
 			position: absolute;
 			top: 8px;
-			left: 0px;
-			@include input-text(200px, 30px);
+			left: 10px;
+			@include input-text(250px, 30px);
 		}
 		h1 {
 			width: 100%;
@@ -67,25 +67,68 @@ header {
 .container {
 	width: 100%;
 	padding-top: 65px;
+	overflow: hidden;
 	.main-page {
-		width: 960px;
-		margin: 0 auto;
-		overflow: hidden;
-		.film {
-			display: block;
-			float: left;
-			margin-right: 10px;
-			margin-bottom: 10px;
-			width: 180px;
-			box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
-			background-color: $film_color;
-			img {
-				display: block;
+		float: right;
+		margin: 0 0 0 -210px;
+		width: 100%;
+    	.films-wrap {
+    		margin: 0 0 0 220px;
+    		overflow: hidden;
+			.film {
+				display: inline-block;
+				margin-right: 10px;
+				margin-bottom: 10px;
+				width: 180px;
+				box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
+				background-color: $film_color;
+				img {
+					width: 180px;
+					display: block;
+				}
+				.title {
+					width: 100%;
+					padding: 10px;
+				}
 			}
-			.title {
-				width: 100%;
-				padding: 10px;
+    	}
+    	.loading {
+			clear: both;
+			text-align: center;
+			img {
+				width: 40px;
 			}
 		}
 	}
+}
+
+.menu {
+	width: 200px;
+	position: fixed;
+	left: 10px;
+	top: 64px;
+    .hiragana-list {
+    	width: 200px;
+    	margin: 0 auto;
+    	background-color: #fff;
+    	overflow: hidden;
+    	.all {
+    		display: block;
+    		width: 100%;
+    		height: 40px;
+    		line-height: 40px;
+    		text-align: center;
+    		border: solid 1px #e2e2e2;
+    	}
+    	.first-letter {
+    		margin: 0px;
+    		display: block;
+    		float: left;
+    		width: 40px;
+    		height: 40px;
+    		line-height: 40px;
+    		text-align: center;
+    		border: solid 1px #e2e2e2;
+    	}
+    }
 }

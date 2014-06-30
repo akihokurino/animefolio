@@ -10,8 +10,13 @@ class Film < ActiveRecord::Base
 			end
 		end
 
-		def get_associated(offset_num, get_num)
-			self.all.select(:id, :title, :thumbnail).order("created_at ASC").offset(offset_num).limit(get_num)
+		def get_associated(offset_num, get_num, letter)
+			p letter
+			unless letter
+				self.all.select(:id, :title, :thumbnail).order("created_at ASC").offset(offset_num).limit(get_num)
+			else
+				self.where(first_letter: letter).select(:id, :title, :thumbnail).order("created_at ASC").offset(offset_num).limit(get_num)
+			end
 		end
 	end
 end

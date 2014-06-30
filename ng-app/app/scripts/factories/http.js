@@ -15,10 +15,26 @@ angular.module("animefolio").factory("http", ["$http", "$rootScope", function ($
 	}
 
 	return {
-		getFilms: function (scope_api, page_num) {
-			http(HOST + "/films?page_num=" + page_num, "GET", {},
+		getFilms: function (scope_api, page_num, scope_status, pagenation, letter) {
+			var url;
+			if(letter){
+				url = HOST + "/films?page_num=" + page_num + "&letter=" + letter
+			}
+			else{
+				url = HOST + "/films?page_num=" + page_num
+			}
+			http(url, "GET", {},
 				function (data, status, headers, config) {
-					scope_api.films = data.films;
+					angular.forEach(data.films, function (film) {
+						scope_api.films.push(film);
+					});
+					console.log(scope_api);
+					scope_status.loading = false;
+
+					if(data.films.length != 0){
+						$(window).bind("scroll", pagenation);
+					}
+
 				},
 				function (data, status, headers, config) {
 					console.log("error");

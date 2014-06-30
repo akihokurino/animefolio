@@ -1,6 +1,11 @@
+<div class="menu" ng-include="'partials/menu.html'"></div>
 <div class="main-page" ng-init="initialize()">
-	<a href="#" class="film" ng-repeat="film in api.films track by $index">
-		<img ng-src="{{film.thumbnail}}" />
-		<p class="title">{{film.title}}</p>
-	</a>
+	<div class="films-wrap" id="films-wrap">
+		<a href="#" class="film" ng-repeat="film in api.films track by $index">
+			<img ng-if="film.thumbnail" ng-src="{{film.thumbnail}}" />
+			<img ng-if="!film.thumbnail" ng-src="../images/noimage.jpg" />
+			<p class="title">{{film.title}}</p>
+		</a>
+	</div>
+	<div class="loading" ng-show="status.loading"><img src="../images/gif-load.gif"></div>
 </div>
