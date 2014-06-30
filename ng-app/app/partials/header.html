@@ -1,4 +1,7 @@
-<div class="inner-header">
-	<input type="text" placeholder="検索">
+<div class="inner-header" ng-controller="HeaderCtrl">
+	<div class="search">
+		<input type="text" placeholder="キーワード" ng-model="keyword" class="keyword">
+		<div class="submit-btn" ng-click="search(keyword)">検索</div>
+	</div>
 	<h1>AnimeFolio</h1>
 </div>

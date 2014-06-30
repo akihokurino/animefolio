@@ -28,7 +28,24 @@ angular.module("animefolio").factory("http", ["$http", "$rootScope", function ($
 					angular.forEach(data.films, function (film) {
 						scope_api.films.push(film);
 					});
-					console.log(scope_api);
+					scope_status.loading = false;
+
+					if(data.films.length != 0){
+						$(window).bind("scroll", pagenation);
+					}
+
+				},
+				function (data, status, headers, config) {
+					console.log("error");
+				}
+			)
+		},
+		searchFilms: function (scope_api, page_num, scope_status, pagenation, keyword) {
+			http(HOST + "/films?page_num=" + page_num + "&keyword=" + keyword, "GET", {},
+				function (data, status, headers, config) {
+					angular.forEach(data.films, function (film) {
+						scope_api.films.push(film);
+					});
 					scope_status.loading = false;
 
 					if(data.films.length != 0){

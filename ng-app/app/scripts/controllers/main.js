@@ -2,10 +2,10 @@
 
 /**
  * @ngdoc function
- * @name ngAppApp.controller:MainCtrl
+ * @name animefolio.controller:MainCtrl
  * @description
  * # MainCtrl
- * Controller of the ngAppApp
+ * Controller of the animefolio
  */
 
 angular.module("animefolio").controller("MainCtrl", function ($scope, $location, http) {
@@ -19,7 +19,14 @@ angular.module("animefolio").controller("MainCtrl", function ($scope, $location,
  		$scope.status.loading = true;
  		page_num = 1;
  		var letter = $location.search().letter;
- 		http.getFilms($scope.api, page_num, $scope.status, pagenation, letter);
+ 		var keyword = $location.search().keyword;
+
+ 		if(keyword){
+ 			http.searchFilms($scope.api, page_num, $scope.status, pagenation, keyword);
+ 		}
+ 		else{
+ 			http.getFilms($scope.api, page_num, $scope.status, pagenation, letter);
+ 		}
  	}
 
  	function pagenation(){
@@ -30,7 +37,13 @@ angular.module("animefolio").controller("MainCtrl", function ($scope, $location,
 			$(window).unbind("scroll");
 			page_num += 1;
 			var letter = $location.search().letter;
-            http.getFilms($scope.api, page_num, $scope.status, pagenation, letter);
+			var keyword = $location.search().keyword;
+            if(keyword){
+	 			http.searchFilms($scope.api, page_num, $scope.status, pagenation, result);
+	 		}
+	 		else{
+	 			http.getFilms($scope.api, page_num, $scope.status, pagenation, letter);
+	 		}
 		}
 	}
 });

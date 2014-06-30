@@ -1,4 +1,12 @@
 class Film < ActiveRecord::Base
+	scope :search_by_keyword, -> (keyword) {
+		where(["title like ?", "%#{keyword}%"])
+	}
+
+	scope :pagenation, -> (offset_num, get_num) {
+		order("created_at ASC").offset(offset_num).limit(get_num)
+	}
+
 	class << self
 		def find_or_create(title, description, thumbnail, first_letter)
 			unless self.exists?(title: title)
@@ -10,13 +18,18 @@ class Film < ActiveRecord::Base
 			end
 		end
 
-		def get_associated(offset_num, get_num, letter)
-			p letter
-			unless letter
-				self.all.select(:id, :title, :thumbnail).order("created_at ASC").offset(offset_num).limit(get_num)
+		def get_associated(offset_num, get_num, letter, keyword)
+			if letter
+				self.where(first_letter: letter).select(:id, :title, :thumbnail).pagenation(offset_num, get_num)
+			elsif keyword
+				self.search_by_keyword(self.escape_like(keyword)).select(:id, :title, :thumbnail).pagenation(offset_num, get_num)
 			else
-				self.where(first_letter: letter).select(:id, :title, :thumbnail).order("created_at ASC").offset(offset_num).limit(get_num)
+				self.all.select(:id, :title, :thumbnail).pagenation(offset_num, get_num)
 			end
+		end
+
+		def escape_like(string)
+		  	string.gsub(/[\\%_]/){|m| "\\#{m}"} if string
 		end
 	end
 end
