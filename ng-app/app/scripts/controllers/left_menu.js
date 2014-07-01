@@ -2,13 +2,13 @@
 
 /**
  * @ngdoc function
- * @name animefolio.controller:MenuCtrl
+ * @name animefolio.controller:LeftMenuCtrl
  * @description
- * # MenuCtrl
+ * # LeftMenuCtrl
  * Controller of the animefolio
  */
 
-angular.module("animefolio").controller("MenuCtrl", function ($scope, $location) {
+angular.module("animefolio").controller("LeftMenuCtrl", function ($scope, $location) {
 	$scope.isSelected = function (this_letter) {
 		var letter = $location.search().letter;
 		if(this_letter == letter){
