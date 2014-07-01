@@ -1,5 +1,7 @@
 <div class="hiragana-list" ng-controller="LeftMenuCtrl">
 	<a href="#/" class="all" ng-class="isDefault()">すべて</a>
+	<a href="#/?type=popular" class="all" ng-class="isPopular()">人気</a>
+	<a href="#/?type=recent" class="all" ng-class="isRecent()">最近</a>
 	<a href="#/?letter=あ" class="first-letter" ng-class="isSelected('あ')">あ</a>
 	<a href="#/?letter=い" class="first-letter" ng-class="isSelected('い')">い</a>
 	<a href="#/?letter=う" class="first-letter" ng-class="isSelected('う')">う</a>

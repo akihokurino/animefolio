@@ -5,6 +5,8 @@ class CreateFilms < ActiveRecord::Migration
       t.text :description
       t.string :thumbnail
       t.string :first_letter
+      t.boolean :recent
+      t.boolean :popular
 
       t.timestamps
     end

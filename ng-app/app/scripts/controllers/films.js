@@ -20,9 +20,13 @@ angular.module("animefolio").controller("FilmsCtrl", function ($scope, $location
  		page_num = 1;
  		var letter = $location.search().letter;
  		var keyword = $location.search().keyword;
+ 		var type = $location.search().type;
 
  		if(keyword){
  			http.searchFilms($scope.api, page_num, $scope.status, pagenation, keyword);
+ 		}
+ 		else if(type){
+ 			http.getPopularOrRecentFilms($scope.api, page_num, $scope.status, pagenation, type)
  		}
  		else{
  			http.getFilms($scope.api, page_num, $scope.status, pagenation, letter);
@@ -38,8 +42,12 @@ angular.module("animefolio").controller("FilmsCtrl", function ($scope, $location
 			page_num += 1;
 			var letter = $location.search().letter;
 			var keyword = $location.search().keyword;
+			var type = $location.search().type;
             if(keyword){
-	 			http.searchFilms($scope.api, page_num, $scope.status, pagenation, result);
+	 			http.searchFilms($scope.api, page_num, $scope.status, pagenation, keyword);
+	 		}
+	 		else if(type){
+	 			http.getPopularOrRecentFilms($scope.api, page_num, $scope.status, pagenation, type)
 	 		}
 	 		else{
 	 			http.getFilms($scope.api, page_num, $scope.status, pagenation, letter);

@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(version: 20140629075055) do
     t.text     "description"
     t.string   "thumbnail"
     t.string   "first_letter"
+    t.boolean  "recent"
+    t.boolean  "popular"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

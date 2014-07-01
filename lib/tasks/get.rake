@@ -6,25 +6,53 @@ namespace :get do
 		require 'nokogiri'
 		require 'kconv'
 
-		def crawl_hiragana(url)
+		def ranking(url)
+			ranking_list = []
+			html = open(url){ |f| f.read }
+			doc = Nokogiri::HTML.parse(html.toutf8, nil, "UTF-8")
+			doc.css(".rank ul li a").each do |node|
+				ranking_list << node.children.text
+			end
+
+			ranking_list
+		end
+
+		def recent(url)
+			recent_list = []
+			html = open(url){ |f| f.read }
+			doc = Nokogiri::HTML.parse(html.toutf8, nil, "UTF-8")
+			doc.css(".sidemenu_body > dt").each do |node|
+				if node.children.text == "放送中のアニメ一覧"
+					node.next.next.css(".L2 a").each do |node|
+						recent_list << node.children.text
+					end
+				end
+			end
+
+			recent_list
+		end
+
+		def crawl_hiragana(url, ranking_list, recent_list)
 			html = open(url){ |f| f.read }
 			doc = Nokogiri::HTML.parse(html.toutf8, nil, "UTF-8")
 			doc.css(".aniTtl .Ttl_btnA a").each do |node|
 				first_letter = node.text
-				crawl_title(node.attributes["href"].value, first_letter)
+				crawl_title(node.attributes["href"].value, first_letter, ranking_list, recent_list)
 			end
 		end
 
-		def crawl_title(url, first_letter)
+		def crawl_title(url, first_letter, ranking_list, recent_list)
 			html = open(url){ |f| f.read }
 			doc = Nokogiri::HTML.parse(html.toutf8, nil, "UTF-8")
 			doc.css(".entry_body .sl_l a").each do |node|
 				title = node.text
-				get_basic(node.attributes["href"].value, title, first_letter)
+				popular = ranking_list.include?(title) ? true : false
+				recent = recent_list.include?(title) ? true : false
+				get_basic(node.attributes["href"].value, title, first_letter, popular, recent)
 			end
 		end
 
-		def get_basic(url, title, first_letter)
+		def get_basic(url, title, first_letter, popular, recent)
 			begin
 				html = open(url){ |f| f.read }
 			rescue Exception
@@ -54,7 +82,7 @@ namespace :get do
 
 			end
 
-			film_id = Film.find_or_create(title, description, thumbnail, first_letter)
+			film_id = Film.find_or_create(title, description, thumbnail, first_letter, popular, recent)
 			crawl_list(doc, film_id)
 		end
 
@@ -172,6 +200,9 @@ namespace :get do
 			end
 		end
 
-		crawl_hiragana("http://animepost.blog.fc2.com")
+		url = "http://animepost.blog.fc2.com"
+		ranking_list = ranking(url)
+		recent_list = recent(url)
+		crawl_hiragana(url, ranking_list, recent_list)
   	end
 end

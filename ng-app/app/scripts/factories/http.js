@@ -58,6 +58,24 @@ angular.module("animefolio").factory("http", ["$http", "$rootScope", function ($
 				}
 			)
 		},
+		getPopularOrRecentFilms: function (scope_api, page_num, scope_status, pagenation, type) {
+			http(HOST + "/films?page_num=" + page_num + "&type=" + type, "GET", {},
+				function (data, status, headers, config) {
+					angular.forEach(data.films, function (film) {
+						scope_api.films.push(film);
+					});
+					scope_status.loading = false;
+
+					if(data.films.length != 0){
+						$(window).bind("scroll", pagenation);
+					}
+
+				},
+				function (data, status, headers, config) {
+					console.log("error");
+				}
+			)
+		},
 		getFilm: function (scope_api, film_id) {
 			http(HOST + "/films/" + film_id, "GET", {},
 				function (data, status, headers, config) {

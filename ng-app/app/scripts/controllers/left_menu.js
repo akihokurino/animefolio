@@ -19,13 +19,24 @@ angular.module("animefolio").controller("LeftMenuCtrl", function ($scope, $locat
 	$scope.isDefault = function () {
 		var letter = $location.search().letter;
 		var keyword = $location.search().keyword;
-		if(!letter && !keyword) {
+		var type = $location.search().type;
+		if(!letter && !keyword && !type) {
 			var url_array = $location.path().split("/");
 			var page = url_array[1];
 			if(page == ""){
 				return "selected";
 			}
 		}
+	}
+
+	$scope.isPopular = function () {
+		var type = $location.search().type;
+		return (type == "popular") ? "selected" : "";
+	}
+
+	$scope.isRecent = function () {
+		var type = $location.search().type;
+		return (type == "recent") ? "selected" : "";
 	}
 });
 
