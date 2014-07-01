@@ -21,9 +21,8 @@ angular.module("animefolio").controller("MenuCtrl", function ($scope, $location)
 		var keyword = $location.search().keyword;
 		if(!letter && !keyword) {
 			var url_array = $location.path().split("/");
-			var id = url_array.pop();
-			var page = url_array.pop();
-			if(page != "contents"){
+			var page = url_array[1];
+			if(page == ""){
 				return "selected";
 			}
 		}

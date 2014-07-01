@@ -69,7 +69,7 @@ header {
 	z-index: 10;
 	.inner-header {
 		width: 100%;
-		min-width: 768px;
+		min-width: 1250px;
 		height: 100%;
 		margin: 0 auto;
 		position: relative;
@@ -92,15 +92,19 @@ header {
 		h1 {
 			width: 100%;
 			text-align: center;
-			line-height: 45px;
-			font-size: 20px;
-			color: $main_color;
+			a {
+				display: inline-block;
+				color: $main_color;
+				font-size: 20px;
+				line-height: 45px;
+			}
 		}
 	}
 }
 
 .container {
 	width: 100%;
+	min-width: 1250px;
 	padding-top: 65px;
 	overflow: hidden;
 	.films-page {
@@ -135,7 +139,7 @@ header {
 			}
 		}
 	}
-	.contents-page {
+	.contents-page, .content-page {
 		width: 800px;
 		margin: 0 auto;
 		.basic {
@@ -165,6 +169,7 @@ header {
 			}
 		}
 		.story-list {
+			padding-bottom: 40px;
 			li {
 				width: 100%;
 				height: 40px;
@@ -187,6 +192,49 @@ header {
 					padding-left: 20px;
 					display: block;
 					color: $main_color;
+				}
+			}
+		}
+		h3 {
+			width: 100%;
+			padding-top: 5px;
+			padding-bottom: 5px;
+			font-weight: normal;
+			box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
+			background-color: $film_color;
+			font-size: 16px;
+			margin-bottom: 10px;
+			padding-left: 20px;
+			position: relative;
+			color: $main_color;
+			.badge {
+				background-color: $main_color;
+				width: 5px;
+				height: 100%;
+				display: inline-block;
+				position: absolute;
+				top: 0px;
+				left: 0px;
+			}
+		}
+		.link-list {
+			padding-bottom: 40px;
+			li {
+				a {
+					display: block;
+					width: 645px;
+					margin: 0 auto;
+					margin-bottom: 10px;
+					margin-top: 40px;
+					color: $main_color;
+					text-decoration: underline;
+				}
+				iframe {
+					display: block;
+					width: 645px;
+					height: 365px;
+					margin: 0 auto;
+					margin-bottom: 40px;
 				}
 			}
 		}

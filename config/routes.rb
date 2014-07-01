@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 	resources :films, only: [:index, :show], format: "json"
-	resources :contents, only: [:index, :show], format: "json"
-	resources :links, only: [:index], format: "json"
+	resources :contents, only: [:show], format: "json"
 	match '/*path' => 'application#cors_preflight_check', :via => :options
   	# The priority is based upon order of creation: first created -> highest priority.
   	# See how all your routes lay out with "rake routes".

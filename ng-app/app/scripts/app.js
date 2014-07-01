@@ -27,6 +27,10 @@ angular.module('animefolio', [
 		templateUrl: 'views/film.html',
 		controller: 'FilmCtrl'
 	})
+	.when('/content/:film_id/:content_id', {
+		templateUrl: 'views/content.html',
+		controller: 'ContentCtrl'
+	})
 	.otherwise({
 		redirectTo: '/'
 	});

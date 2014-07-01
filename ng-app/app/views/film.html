@@ -10,7 +10,7 @@
 	<ul class="story-list">
 		<li ng-repeat="content in api.film.contents track by $index">
 			<span class="badge"></span>
-			<a href="#/content/{{content.id}}">
+			<a href="#/content/{{api.film.id}}/{{content.id}}">
 				{{strimWidth(content.title, 55)}}
 			</a>
 		</li>

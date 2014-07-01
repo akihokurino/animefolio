@@ -1,0 +1,19 @@
+<div class="menu" ng-include="'partials/menu.html'"></div>
+<div class="content-page" ng-init="initialize()">
+	<div class="basic">
+		<img ng-src="{{api.film.thumbnail}}">
+		<div class="body">
+			<h2 class="title">{{api.film.title}}</h2>
+			<p class="description">{{api.film.description}}</p>
+		</div>
+	</div>
+	<h3><span class="badge"></span>{{api.content.title}}</h3>
+	<ul class="link-list">
+		<li ng-repeat="link in api.content.links track by $index">
+			<a target="_blank" href="{{link.url}}" class="link-title">
+				{{link.title}}
+			</a>
+			<iframe ng-src="{{appendUrl(link.url)}}" ng-if="link.title != 'MP4up'"></iframe>
+		</li>
+	</ul>
+</div>

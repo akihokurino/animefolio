@@ -44,6 +44,16 @@ namespace :get do
 
 			p "#{title} 開始"
 
+			if description.nil? || thumbnail.nil?
+				doc.css(".story p.t2").each do |node|
+					description = node.children.text
+				end
+				doc.css(".story img").each do |node|
+					thumbnail = thumbnail = node.attributes["src"].value if node.name == "img"
+				end
+
+			end
+
 			film_id = Film.find_or_create(title, description, thumbnail, first_letter)
 			crawl_list(doc, film_id)
 		end
@@ -117,6 +127,17 @@ namespace :get do
 						end
 					end
 				end
+				if node.attributes["class"] && node.attributes["class"].value == "aniTabD"
+					doc.css("#more > div.aniTabD").each_with_index do |node, index|
+						node.css("#movie").each do |node|
+							title = node.children.text
+							content_id = Content.find_or_create(title, film_id)
+						end
+						node.css(".Tab_cnt ul li a").each do |node|
+							get_links(node, content_id)
+						end
+					end
+				end
 			end
 
 			p "正常に終了"
@@ -124,7 +145,7 @@ namespace :get do
 
 		def get_links(node, content_id)
 			case node.children.text
-			when "AUE"
+			when /AUE/
 				title = node.children.text
 				url = node.attributes["href"].value
 			when "Trollvid"
