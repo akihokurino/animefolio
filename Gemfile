@@ -37,7 +37,14 @@ gem 'spring',        group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-
+gem 'unicorn'
 gem 'nokogiri'
 gem 'rails_config'
 
+gem 'capistrano', '~> 3.2.0'
+gem 'capistrano-rails'
+gem 'capistrano-rbenv'
+gem "unicorn-rails"
+group :development do
+  gem 'capistrano3-unicorn'
+end
