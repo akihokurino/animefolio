@@ -1,6 +1,6 @@
 worker_processes 2
 
-project_root = File.expand_path("../", __FILE__)
+project_root = File.expand_path("../../../", __FILE__)
 listen "#{project_root}/tmp/unicorn.sock"
 pid "#{project_root}/tmp/pids/unicorn.pid"
 
