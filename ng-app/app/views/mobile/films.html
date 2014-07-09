@@ -1,0 +1,12 @@
+<div class="films-page" ng-init="initialize()">
+	<div class="inner-films-page">
+		<div class="films-wrap" id="films-wrap">
+			<a href="#/contents/{{film.id}}" class="film" ng-repeat="film in api.films track by $index">
+				<img ng-if="film.thumbnail" ng-src="{{film.thumbnail}}" />
+				<img ng-if="!film.thumbnail" ng-src="../images/noimage.jpg" />
+				<p class="title">{{film.title}}</p>
+			</a>
+		</div>
+	</div>
+	<div class="loading" ng-show="status.loading"><img src="../images/gif-load.gif"></div>
+</div>
