@@ -13,7 +13,7 @@
 	<!-- endbower -->
 	<!-- endbuild -->
 	<!-- build:css(.tmp) styles/main.css -->
-	<link rel="stylesheet" href="styles/all.css">
+	<link rel="stylesheet" href="styles/mobile_all.css">
 	<!-- endbuild -->
 </head>
 <body ng-app="animefolio">
@@ -22,8 +22,10 @@
 	<![endif]-->
 
 	<!-- Add your site or application content here -->
-	<header ng-include="'partials/header.html'"></header>
+	<header ng-include="'partials/mobile/header.html'"></header>
 	<div class="container" ng-view=""></div>
+	<div class="layer"></div>
+	<div class="menu" ng-include="'partials/mobile/menu.html'"></div></div>
 
 	<!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
 	<script>
@@ -67,13 +69,12 @@
 	<!-- endbuild -->
 
 	<!-- build:js({.tmp,app}) scripts/scripts.js -->
-	<script src="scripts/app.js"></script>
+	<script src="scripts/mobile_app.js"></script>
 	<script src="scripts/factories/http.js"></script>
-	<script src="scripts/controllers/header.js"></script>
-	<script src="scripts/controllers/left_menu.js"></script>
-	<script src="scripts/controllers/films.js"></script>
-	<script src="scripts/controllers/film.js"></script>
-	<script src="scripts/controllers/content.js"></script>
+	<script src="scripts/controllers/mobile/header.js"></script>
+	<script src="scripts/controllers/mobile/films.js"></script>
+	<script src="scripts/controllers/mobile/film.js"></script>
+	<script src="scripts/controllers/mobile/content.js"></script>
 	<!-- endbuild -->
 </body>
 </html>
