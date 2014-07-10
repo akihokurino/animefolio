@@ -1,5 +1,5 @@
 angular.module("animefolio").factory("http", ["$http", "$rootScope", function ($http, $rootScope){
-	var HOST = "http://127.0.0.1:3000";
+	var HOST = "http://animefolio.com/api/";
 	function http (url, method, data, success_fn, error_fn) {
 		$http({
 			url: url,
