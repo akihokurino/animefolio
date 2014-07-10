@@ -148,7 +148,11 @@ header {
 			}
 		}
 		.menu-btn {
-			@include btn(45px, 45px);
+			background-image: url(../images/menu-btn.png);
+			background-repeat: no-repeat;
+			background-size: 45px 45px;
+			width: 45px;
+			height: 45px;
 			position: absolute;
 			top: 0px;
 			left: 0px;
@@ -170,21 +174,22 @@ header {
 	width: 100%;
 	padding-top: 65px;
 	.films-page, .film-page, .content-page {
-		width: 100%;
+		width: 768px;
+		margin: 0 auto;
 		.inner-films-page, .inner-film-page, .inner-content-page {
 	    	.films-wrap {
 	    		overflow: hidden;
-	    		padding: 10px;
+	    		padding: 13px;
 	    		padding-right: 0px;
 				.film {
 					display: inline-block;
-					margin-right: 10px;
+					margin-right: 13px;
 					margin-bottom: 10px;
-					width: 180px;
+					width: 175px;
 					box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
 					background-color: $film_color;
 					img {
-						width: 180px;
+						width: 175px;
 						display: block;
 					}
 					.title {

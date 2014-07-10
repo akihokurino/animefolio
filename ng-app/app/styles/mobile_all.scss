@@ -134,7 +134,11 @@ header {
 		margin: 0 auto;
 		position: relative;
 		.menu-btn {
-			@include btn(45px, 45px);
+			background-image: url(../images/menu-btn.png);
+			background-repeat: no-repeat;
+			background-size: 45px 45px;
+			width: 45px;
+			height: 45px;
 			position: absolute;
 			top: 0px;
 			left: 0px;
