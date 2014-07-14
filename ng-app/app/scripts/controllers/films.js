@@ -36,7 +36,7 @@ angular.module("animefolio").controller("FilmsCtrl", function ($scope, $location
  	function pagenation(){
 		var scrollHeight = $(document).height();
 		var scrollPosition = $(window).height() + $(window).scrollTop();
-		if((scrollHeight - scrollPosition) / scrollHeight <= 1){
+		if((scrollHeight - scrollPosition) / scrollHeight <= 0.1){
 			$scope.status.loading = true;
 			$(window).unbind("scroll");
 			page_num += 1;

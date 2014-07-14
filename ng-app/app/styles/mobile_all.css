@@ -1,0 +1,214 @@
+@charset "UTF-8";
+* {
+  font-family: 'Helvetica Neue','Helvetica','ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ','Meiryo','ＭＳ Ｐゴシック',arial,sans-serif;
+  color: #444;
+  font-size: 14px;
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box; }
+
+a {
+  text-decoration: none; }
+
+ul {
+  list-style-type: none; }
+
+html {
+  -webkit-overflow-scrolling: touch; }
+
+body {
+  background-color: #e9e9e9;
+  -webkit-overflow-scrolling: touch; }
+
+.layer {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background-color: #000;
+  opacity: 0.6;
+  z-index: 1;
+  display: none; }
+
+.menu {
+  width: 100%;
+  position: fixed;
+  z-index: 10;
+  top: 45px;
+  left: 0px;
+  background-color: #fff;
+  display: none;
+  height: 620px;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch; }
+  .menu .hiragana-list {
+    width: 100%;
+    margin: 0 auto;
+    background-color: #fff;
+    overflow: hidden; }
+    .menu .hiragana-list .all {
+      display: block;
+      width: 100%;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      border: solid 1px #e2e2e2; }
+    .menu .hiragana-list .lines {
+      width: 300px;
+      margin: 0 auto; }
+      .menu .hiragana-list .lines .line {
+        width: 300px; }
+        .menu .hiragana-list .lines .line .first-letter {
+          margin: 0px;
+          display: block;
+          float: left;
+          width: 60px;
+          height: 60px;
+          line-height: 60px;
+          text-align: center;
+          border: solid 1px #e2e2e2; }
+
+header {
+  width: 100%;
+  height: 45px;
+  background-color: white;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 0 0 rgba(0, 0, 0, 0.1);
+  -webkit-transform: translateZ(0);
+  position: fixed;
+  z-index: 10; }
+  header .inner-header {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    position: relative; }
+    header .inner-header .menu-btn {
+      background-image: url(../images/menu-btn.png);
+      background-repeat: no-repeat;
+      background-size: 45px 45px;
+      width: 45px;
+      height: 45px;
+      position: absolute;
+      top: 0px;
+      left: 0px; }
+    header .inner-header h1 {
+      width: 100%;
+      text-align: center; }
+      header .inner-header h1 a {
+        display: inline-block;
+        color: #2980b9;
+        font-size: 20px;
+        line-height: 45px; }
+
+.container {
+  width: 100%;
+  padding-top: 65px; }
+  .container .films-page, .container .film-page, .container .content-page {
+    width: 100%; }
+    .container .films-page .inner-films-page .films-wrap, .container .films-page .inner-film-page .films-wrap, .container .films-page .inner-content-page .films-wrap, .container .film-page .inner-films-page .films-wrap, .container .film-page .inner-film-page .films-wrap, .container .film-page .inner-content-page .films-wrap, .container .content-page .inner-films-page .films-wrap, .container .content-page .inner-film-page .films-wrap, .container .content-page .inner-content-page .films-wrap {
+      overflow: hidden;
+      padding: 10px;
+      padding-left: 12px;
+      padding-right: 0px; }
+      .container .films-page .inner-films-page .films-wrap .film, .container .films-page .inner-film-page .films-wrap .film, .container .films-page .inner-content-page .films-wrap .film, .container .film-page .inner-films-page .films-wrap .film, .container .film-page .inner-film-page .films-wrap .film, .container .film-page .inner-content-page .films-wrap .film, .container .content-page .inner-films-page .films-wrap .film, .container .content-page .inner-film-page .films-wrap .film, .container .content-page .inner-content-page .films-wrap .film {
+        display: inline-block;
+        margin-bottom: 10px;
+        width: 47%;
+        padding: 10px;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
+        background-color: white;
+        margin-right: 10px; }
+        .container .films-page .inner-films-page .films-wrap .film img, .container .films-page .inner-film-page .films-wrap .film img, .container .films-page .inner-content-page .films-wrap .film img, .container .film-page .inner-films-page .films-wrap .film img, .container .film-page .inner-film-page .films-wrap .film img, .container .film-page .inner-content-page .films-wrap .film img, .container .content-page .inner-films-page .films-wrap .film img, .container .content-page .inner-film-page .films-wrap .film img, .container .content-page .inner-content-page .films-wrap .film img {
+          width: 100%;
+          display: block; }
+        .container .films-page .inner-films-page .films-wrap .film .title, .container .films-page .inner-film-page .films-wrap .film .title, .container .films-page .inner-content-page .films-wrap .film .title, .container .film-page .inner-films-page .films-wrap .film .title, .container .film-page .inner-film-page .films-wrap .film .title, .container .film-page .inner-content-page .films-wrap .film .title, .container .content-page .inner-films-page .films-wrap .film .title, .container .content-page .inner-film-page .films-wrap .film .title, .container .content-page .inner-content-page .films-wrap .film .title {
+          width: 100%;
+          padding: 10px; }
+    .container .films-page .inner-films-page .film-wrap, .container .films-page .inner-films-page .content-wrap, .container .films-page .inner-film-page .film-wrap, .container .films-page .inner-film-page .content-wrap, .container .films-page .inner-content-page .film-wrap, .container .films-page .inner-content-page .content-wrap, .container .film-page .inner-films-page .film-wrap, .container .film-page .inner-films-page .content-wrap, .container .film-page .inner-film-page .film-wrap, .container .film-page .inner-film-page .content-wrap, .container .film-page .inner-content-page .film-wrap, .container .film-page .inner-content-page .content-wrap, .container .content-page .inner-films-page .film-wrap, .container .content-page .inner-films-page .content-wrap, .container .content-page .inner-film-page .film-wrap, .container .content-page .inner-film-page .content-wrap, .container .content-page .inner-content-page .film-wrap, .container .content-page .inner-content-page .content-wrap {
+      overflow: hidden;
+      width: 100%;
+      padding: 10px; }
+      .container .films-page .inner-films-page .film-wrap .basic, .container .films-page .inner-films-page .content-wrap .basic, .container .films-page .inner-film-page .film-wrap .basic, .container .films-page .inner-film-page .content-wrap .basic, .container .films-page .inner-content-page .film-wrap .basic, .container .films-page .inner-content-page .content-wrap .basic, .container .film-page .inner-films-page .film-wrap .basic, .container .film-page .inner-films-page .content-wrap .basic, .container .film-page .inner-film-page .film-wrap .basic, .container .film-page .inner-film-page .content-wrap .basic, .container .film-page .inner-content-page .film-wrap .basic, .container .film-page .inner-content-page .content-wrap .basic, .container .content-page .inner-films-page .film-wrap .basic, .container .content-page .inner-films-page .content-wrap .basic, .container .content-page .inner-film-page .film-wrap .basic, .container .content-page .inner-film-page .content-wrap .basic, .container .content-page .inner-content-page .film-wrap .basic, .container .content-page .inner-content-page .content-wrap .basic {
+        overflow: hidden;
+        background-color: white;
+        padding: 10px;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
+        margin-bottom: 20px; }
+        .container .films-page .inner-films-page .film-wrap .basic img, .container .films-page .inner-films-page .content-wrap .basic img, .container .films-page .inner-film-page .film-wrap .basic img, .container .films-page .inner-film-page .content-wrap .basic img, .container .films-page .inner-content-page .film-wrap .basic img, .container .films-page .inner-content-page .content-wrap .basic img, .container .film-page .inner-films-page .film-wrap .basic img, .container .film-page .inner-films-page .content-wrap .basic img, .container .film-page .inner-film-page .film-wrap .basic img, .container .film-page .inner-film-page .content-wrap .basic img, .container .film-page .inner-content-page .film-wrap .basic img, .container .film-page .inner-content-page .content-wrap .basic img, .container .content-page .inner-films-page .film-wrap .basic img, .container .content-page .inner-films-page .content-wrap .basic img, .container .content-page .inner-film-page .film-wrap .basic img, .container .content-page .inner-film-page .content-wrap .basic img, .container .content-page .inner-content-page .film-wrap .basic img, .container .content-page .inner-content-page .content-wrap .basic img {
+          width: 270px;
+          display: block;
+          margin: 0 auto;
+          margin-bottom: 10px; }
+        .container .films-page .inner-films-page .film-wrap .basic .body, .container .films-page .inner-films-page .content-wrap .basic .body, .container .films-page .inner-film-page .film-wrap .basic .body, .container .films-page .inner-film-page .content-wrap .basic .body, .container .films-page .inner-content-page .film-wrap .basic .body, .container .films-page .inner-content-page .content-wrap .basic .body, .container .film-page .inner-films-page .film-wrap .basic .body, .container .film-page .inner-films-page .content-wrap .basic .body, .container .film-page .inner-film-page .film-wrap .basic .body, .container .film-page .inner-film-page .content-wrap .basic .body, .container .film-page .inner-content-page .film-wrap .basic .body, .container .film-page .inner-content-page .content-wrap .basic .body, .container .content-page .inner-films-page .film-wrap .basic .body, .container .content-page .inner-films-page .content-wrap .basic .body, .container .content-page .inner-film-page .film-wrap .basic .body, .container .content-page .inner-film-page .content-wrap .basic .body, .container .content-page .inner-content-page .film-wrap .basic .body, .container .content-page .inner-content-page .content-wrap .basic .body {
+          width: 100%; }
+          .container .films-page .inner-films-page .film-wrap .basic .body .title, .container .films-page .inner-films-page .content-wrap .basic .body .title, .container .films-page .inner-film-page .film-wrap .basic .body .title, .container .films-page .inner-film-page .content-wrap .basic .body .title, .container .films-page .inner-content-page .film-wrap .basic .body .title, .container .films-page .inner-content-page .content-wrap .basic .body .title, .container .film-page .inner-films-page .film-wrap .basic .body .title, .container .film-page .inner-films-page .content-wrap .basic .body .title, .container .film-page .inner-film-page .film-wrap .basic .body .title, .container .film-page .inner-film-page .content-wrap .basic .body .title, .container .film-page .inner-content-page .film-wrap .basic .body .title, .container .film-page .inner-content-page .content-wrap .basic .body .title, .container .content-page .inner-films-page .film-wrap .basic .body .title, .container .content-page .inner-films-page .content-wrap .basic .body .title, .container .content-page .inner-film-page .film-wrap .basic .body .title, .container .content-page .inner-film-page .content-wrap .basic .body .title, .container .content-page .inner-content-page .film-wrap .basic .body .title, .container .content-page .inner-content-page .content-wrap .basic .body .title {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 10px; }
+          .container .films-page .inner-films-page .film-wrap .basic .body .description, .container .films-page .inner-films-page .content-wrap .basic .body .description, .container .films-page .inner-film-page .film-wrap .basic .body .description, .container .films-page .inner-film-page .content-wrap .basic .body .description, .container .films-page .inner-content-page .film-wrap .basic .body .description, .container .films-page .inner-content-page .content-wrap .basic .body .description, .container .film-page .inner-films-page .film-wrap .basic .body .description, .container .film-page .inner-films-page .content-wrap .basic .body .description, .container .film-page .inner-film-page .film-wrap .basic .body .description, .container .film-page .inner-film-page .content-wrap .basic .body .description, .container .film-page .inner-content-page .film-wrap .basic .body .description, .container .film-page .inner-content-page .content-wrap .basic .body .description, .container .content-page .inner-films-page .film-wrap .basic .body .description, .container .content-page .inner-films-page .content-wrap .basic .body .description, .container .content-page .inner-film-page .film-wrap .basic .body .description, .container .content-page .inner-film-page .content-wrap .basic .body .description, .container .content-page .inner-content-page .film-wrap .basic .body .description, .container .content-page .inner-content-page .content-wrap .basic .body .description {
+            font-size: 16px;
+            line-height: 22px; }
+      .container .films-page .inner-films-page .film-wrap .story-list, .container .films-page .inner-films-page .content-wrap .story-list, .container .films-page .inner-film-page .film-wrap .story-list, .container .films-page .inner-film-page .content-wrap .story-list, .container .films-page .inner-content-page .film-wrap .story-list, .container .films-page .inner-content-page .content-wrap .story-list, .container .film-page .inner-films-page .film-wrap .story-list, .container .film-page .inner-films-page .content-wrap .story-list, .container .film-page .inner-film-page .film-wrap .story-list, .container .film-page .inner-film-page .content-wrap .story-list, .container .film-page .inner-content-page .film-wrap .story-list, .container .film-page .inner-content-page .content-wrap .story-list, .container .content-page .inner-films-page .film-wrap .story-list, .container .content-page .inner-films-page .content-wrap .story-list, .container .content-page .inner-film-page .film-wrap .story-list, .container .content-page .inner-film-page .content-wrap .story-list, .container .content-page .inner-content-page .film-wrap .story-list, .container .content-page .inner-content-page .content-wrap .story-list {
+        padding-bottom: 40px; }
+        .container .films-page .inner-films-page .film-wrap .story-list li, .container .films-page .inner-films-page .content-wrap .story-list li, .container .films-page .inner-film-page .film-wrap .story-list li, .container .films-page .inner-film-page .content-wrap .story-list li, .container .films-page .inner-content-page .film-wrap .story-list li, .container .films-page .inner-content-page .content-wrap .story-list li, .container .film-page .inner-films-page .film-wrap .story-list li, .container .film-page .inner-films-page .content-wrap .story-list li, .container .film-page .inner-film-page .film-wrap .story-list li, .container .film-page .inner-film-page .content-wrap .story-list li, .container .film-page .inner-content-page .film-wrap .story-list li, .container .film-page .inner-content-page .content-wrap .story-list li, .container .content-page .inner-films-page .film-wrap .story-list li, .container .content-page .inner-films-page .content-wrap .story-list li, .container .content-page .inner-film-page .film-wrap .story-list li, .container .content-page .inner-film-page .content-wrap .story-list li, .container .content-page .inner-content-page .film-wrap .story-list li, .container .content-page .inner-content-page .content-wrap .story-list li {
+          width: 100%;
+          padding-top: 6px;
+          padding-bottom: 6px;
+          line-height: 40px;
+          box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
+          background-color: white;
+          font-size: 16px;
+          margin-bottom: 10px;
+          position: relative; }
+          .container .films-page .inner-films-page .film-wrap .story-list li .badge, .container .films-page .inner-films-page .content-wrap .story-list li .badge, .container .films-page .inner-film-page .film-wrap .story-list li .badge, .container .films-page .inner-film-page .content-wrap .story-list li .badge, .container .films-page .inner-content-page .film-wrap .story-list li .badge, .container .films-page .inner-content-page .content-wrap .story-list li .badge, .container .film-page .inner-films-page .film-wrap .story-list li .badge, .container .film-page .inner-films-page .content-wrap .story-list li .badge, .container .film-page .inner-film-page .film-wrap .story-list li .badge, .container .film-page .inner-film-page .content-wrap .story-list li .badge, .container .film-page .inner-content-page .film-wrap .story-list li .badge, .container .film-page .inner-content-page .content-wrap .story-list li .badge, .container .content-page .inner-films-page .film-wrap .story-list li .badge, .container .content-page .inner-films-page .content-wrap .story-list li .badge, .container .content-page .inner-film-page .film-wrap .story-list li .badge, .container .content-page .inner-film-page .content-wrap .story-list li .badge, .container .content-page .inner-content-page .film-wrap .story-list li .badge, .container .content-page .inner-content-page .content-wrap .story-list li .badge {
+            background-color: #2980b9;
+            width: 5px;
+            height: 100%;
+            display: inline-block;
+            position: absolute;
+            top: 0px;
+            left: 0px; }
+          .container .films-page .inner-films-page .film-wrap .story-list li a, .container .films-page .inner-films-page .content-wrap .story-list li a, .container .films-page .inner-film-page .film-wrap .story-list li a, .container .films-page .inner-film-page .content-wrap .story-list li a, .container .films-page .inner-content-page .film-wrap .story-list li a, .container .films-page .inner-content-page .content-wrap .story-list li a, .container .film-page .inner-films-page .film-wrap .story-list li a, .container .film-page .inner-films-page .content-wrap .story-list li a, .container .film-page .inner-film-page .film-wrap .story-list li a, .container .film-page .inner-film-page .content-wrap .story-list li a, .container .film-page .inner-content-page .film-wrap .story-list li a, .container .film-page .inner-content-page .content-wrap .story-list li a, .container .content-page .inner-films-page .film-wrap .story-list li a, .container .content-page .inner-films-page .content-wrap .story-list li a, .container .content-page .inner-film-page .film-wrap .story-list li a, .container .content-page .inner-film-page .content-wrap .story-list li a, .container .content-page .inner-content-page .film-wrap .story-list li a, .container .content-page .inner-content-page .content-wrap .story-list li a {
+            padding-left: 20px;
+            display: block;
+            color: #2980b9; }
+      .container .films-page .inner-films-page .film-wrap h3, .container .films-page .inner-films-page .content-wrap h3, .container .films-page .inner-film-page .film-wrap h3, .container .films-page .inner-film-page .content-wrap h3, .container .films-page .inner-content-page .film-wrap h3, .container .films-page .inner-content-page .content-wrap h3, .container .film-page .inner-films-page .film-wrap h3, .container .film-page .inner-films-page .content-wrap h3, .container .film-page .inner-film-page .film-wrap h3, .container .film-page .inner-film-page .content-wrap h3, .container .film-page .inner-content-page .film-wrap h3, .container .film-page .inner-content-page .content-wrap h3, .container .content-page .inner-films-page .film-wrap h3, .container .content-page .inner-films-page .content-wrap h3, .container .content-page .inner-film-page .film-wrap h3, .container .content-page .inner-film-page .content-wrap h3, .container .content-page .inner-content-page .film-wrap h3, .container .content-page .inner-content-page .content-wrap h3 {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        font-weight: normal;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
+        background-color: white;
+        font-size: 16px;
+        margin-bottom: 10px;
+        padding-left: 20px;
+        position: relative;
+        color: #2980b9; }
+        .container .films-page .inner-films-page .film-wrap h3 .badge, .container .films-page .inner-films-page .content-wrap h3 .badge, .container .films-page .inner-film-page .film-wrap h3 .badge, .container .films-page .inner-film-page .content-wrap h3 .badge, .container .films-page .inner-content-page .film-wrap h3 .badge, .container .films-page .inner-content-page .content-wrap h3 .badge, .container .film-page .inner-films-page .film-wrap h3 .badge, .container .film-page .inner-films-page .content-wrap h3 .badge, .container .film-page .inner-film-page .film-wrap h3 .badge, .container .film-page .inner-film-page .content-wrap h3 .badge, .container .film-page .inner-content-page .film-wrap h3 .badge, .container .film-page .inner-content-page .content-wrap h3 .badge, .container .content-page .inner-films-page .film-wrap h3 .badge, .container .content-page .inner-films-page .content-wrap h3 .badge, .container .content-page .inner-film-page .film-wrap h3 .badge, .container .content-page .inner-film-page .content-wrap h3 .badge, .container .content-page .inner-content-page .film-wrap h3 .badge, .container .content-page .inner-content-page .content-wrap h3 .badge {
+          background-color: #2980b9;
+          width: 5px;
+          height: 100%;
+          display: inline-block;
+          position: absolute;
+          top: 0px;
+          left: 0px; }
+      .container .films-page .inner-films-page .film-wrap .link-list, .container .films-page .inner-films-page .content-wrap .link-list, .container .films-page .inner-film-page .film-wrap .link-list, .container .films-page .inner-film-page .content-wrap .link-list, .container .films-page .inner-content-page .film-wrap .link-list, .container .films-page .inner-content-page .content-wrap .link-list, .container .film-page .inner-films-page .film-wrap .link-list, .container .film-page .inner-films-page .content-wrap .link-list, .container .film-page .inner-film-page .film-wrap .link-list, .container .film-page .inner-film-page .content-wrap .link-list, .container .film-page .inner-content-page .film-wrap .link-list, .container .film-page .inner-content-page .content-wrap .link-list, .container .content-page .inner-films-page .film-wrap .link-list, .container .content-page .inner-films-page .content-wrap .link-list, .container .content-page .inner-film-page .film-wrap .link-list, .container .content-page .inner-film-page .content-wrap .link-list, .container .content-page .inner-content-page .film-wrap .link-list, .container .content-page .inner-content-page .content-wrap .link-list {
+        padding-bottom: 40px; }
+        .container .films-page .inner-films-page .film-wrap .link-list li a, .container .films-page .inner-films-page .content-wrap .link-list li a, .container .films-page .inner-film-page .film-wrap .link-list li a, .container .films-page .inner-film-page .content-wrap .link-list li a, .container .films-page .inner-content-page .film-wrap .link-list li a, .container .films-page .inner-content-page .content-wrap .link-list li a, .container .film-page .inner-films-page .film-wrap .link-list li a, .container .film-page .inner-films-page .content-wrap .link-list li a, .container .film-page .inner-film-page .film-wrap .link-list li a, .container .film-page .inner-film-page .content-wrap .link-list li a, .container .film-page .inner-content-page .film-wrap .link-list li a, .container .film-page .inner-content-page .content-wrap .link-list li a, .container .content-page .inner-films-page .film-wrap .link-list li a, .container .content-page .inner-films-page .content-wrap .link-list li a, .container .content-page .inner-film-page .film-wrap .link-list li a, .container .content-page .inner-film-page .content-wrap .link-list li a, .container .content-page .inner-content-page .film-wrap .link-list li a, .container .content-page .inner-content-page .content-wrap .link-list li a {
+          display: block;
+          width: 100%;
+          margin: 0 auto;
+          margin-bottom: 10px;
+          margin-top: 40px;
+          color: #2980b9;
+          text-decoration: underline; }
+        .container .films-page .inner-films-page .film-wrap .link-list li iframe, .container .films-page .inner-films-page .content-wrap .link-list li iframe, .container .films-page .inner-film-page .film-wrap .link-list li iframe, .container .films-page .inner-film-page .content-wrap .link-list li iframe, .container .films-page .inner-content-page .film-wrap .link-list li iframe, .container .films-page .inner-content-page .content-wrap .link-list li iframe, .container .film-page .inner-films-page .film-wrap .link-list li iframe, .container .film-page .inner-films-page .content-wrap .link-list li iframe, .container .film-page .inner-film-page .film-wrap .link-list li iframe, .container .film-page .inner-film-page .content-wrap .link-list li iframe, .container .film-page .inner-content-page .film-wrap .link-list li iframe, .container .film-page .inner-content-page .content-wrap .link-list li iframe, .container .content-page .inner-films-page .film-wrap .link-list li iframe, .container .content-page .inner-films-page .content-wrap .link-list li iframe, .container .content-page .inner-film-page .film-wrap .link-list li iframe, .container .content-page .inner-film-page .content-wrap .link-list li iframe, .container .content-page .inner-content-page .film-wrap .link-list li iframe, .container .content-page .inner-content-page .content-wrap .link-list li iframe {
+          display: block;
+          width: 320px;
+          height: 300px;
+          margin: 0 auto;
+          margin-bottom: 40px; }
+    .container .films-page .loading, .container .film-page .loading, .container .content-page .loading {
+      clear: both;
+      text-align: center; }
+      .container .films-page .loading img, .container .film-page .loading img, .container .content-page .loading img {
+        width: 40px; }
