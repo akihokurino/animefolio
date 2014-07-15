@@ -21,8 +21,8 @@ angular.module("animefolio").controller("ContentCtrl", function ($scope, $locati
  		http.getContent($scope.api, content_id, film_id);
  	}
 
- 	$scope.appendUrl = function(url){
-        return $sce.trustAsResourceUrl(url);
-    }
+ 	$scope.appendUrl = function (url) {
+    return $sce.trustAsResourceUrl(url);
+  }
 });
 

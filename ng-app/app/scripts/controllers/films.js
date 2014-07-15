@@ -43,7 +43,7 @@ angular.module("animefolio").controller("FilmsCtrl", function ($scope, $location
 			var letter = $location.search().letter;
 			var keyword = $location.search().keyword;
 			var type = $location.search().type;
-            if(keyword){
+      if(keyword){
 	 			http.searchFilms($scope.api, page_num, $scope.status, pagenation, keyword);
 	 		}
 	 		else if(type){

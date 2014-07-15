@@ -1,5 +1,6 @@
 angular.module("animefolio").factory("http", ["$http", "$rootScope", function ($http, $rootScope){
 	var HOST = "http://animefolio.com/api/";
+
 	function http (url, method, data, success_fn, error_fn) {
 		$http({
 			url: url,
@@ -7,8 +8,8 @@ angular.module("animefolio").factory("http", ["$http", "$rootScope", function ($
 			data: data,
 			withCredentials: true,
 			header: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
 		})
 		.success(success_fn)
 		.error(error_fn);
@@ -51,7 +52,6 @@ angular.module("animefolio").factory("http", ["$http", "$rootScope", function ($
 					if(data.films.length != 0){
 						$(window).bind("scroll", pagenation);
 					}
-
 				},
 				function (data, status, headers, config) {
 					console.log("error");
@@ -69,7 +69,6 @@ angular.module("animefolio").factory("http", ["$http", "$rootScope", function ($
 					if(data.films.length != 0){
 						$(window).bind("scroll", pagenation);
 					}
-
 				},
 				function (data, status, headers, config) {
 					console.log("error");
@@ -80,6 +79,7 @@ angular.module("animefolio").factory("http", ["$http", "$rootScope", function ($
 			http(HOST + "/films/" + film_id, "GET", {},
 				function (data, status, headers, config) {
 					scope_api.film = data.film;
+					$rootScope.$broadcast("film", data.film);
 				},
 				function (data, status, headers, config) {
 					console.log("error");
@@ -91,7 +91,6 @@ angular.module("animefolio").factory("http", ["$http", "$rootScope", function ($
 				function (data, status, headers, config) {
 					scope_api.film = data.film;
 					scope_api.content = data.content;
-					console.log(scope_api);
 				},
 				function (data, status, headers, config) {
 					console.log("error");

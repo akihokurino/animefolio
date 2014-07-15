@@ -49,11 +49,11 @@ angular.module("animefolio").controller("HeaderCtrl", function ($scope, $locatio
 
 	$scope.enter = function (keyword) {
 		if(event.keyCode === 13 && keyword){
-	        var tmp_keyword = keyword;
+	    var tmp_keyword = keyword;
 			keyword = null;
 			$(".keyword").val("");
 			location.href = "#/?keyword=" + tmp_keyword
-	    }
+	  }
 	}
 
 	$scope.showMenu = function () {

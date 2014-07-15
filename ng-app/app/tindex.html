@@ -1,6 +1,6 @@
 <!doctype html>
-<html class="no-js">
-<head>
+<html class="no-js" ng-app="animefolio">
+<head ng-controller="HeadCtrl">
 	<meta charset="utf-8">
 	<title>AnimeFolio</title>
 	<meta name="description" content="アニメの動画を集めたサイトです。ほとんど全てのコンテンツを無料で視聴することが可能です。">
@@ -15,9 +15,6 @@
 	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:site" content="@animefolio2014">
 	<meta name="twitter:creator" content="@animefolio2014">
-	<meta property="og:title" content="AnimeFolio">
-	<meta property="og:description" content="アニメの動画を集めたサイトです。ほとんど全てのコンテンツを無料で視聴することが可能です。">
-	<meta property="og:image" content="{{api.film.thumbnail ? api.film.thumbnail : ''}}">
 	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 	<!-- build:css(.) styles/vendor.css -->
 	<!-- bower:css -->
@@ -27,7 +24,7 @@
 	<link rel="stylesheet" href="styles/tablet_all.css">
 	<!-- endbuild -->
 </head>
-<body ng-app="animefolio">
+<body>
 	<!--[if lt IE 7]>
 	<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 	<![endif]-->
@@ -36,7 +33,7 @@
 	<header ng-include="'partials/mobile/header.html'"></header>
 	<div class="container" ng-view=""></div>
 	<div class="layer"></div>
-	<div class="menu" ng-include="'partials/mobile/menu.html'"></div></div>
+	<div class="menu" ng-include="'partials/mobile/menu.html'"></div>
 
 	<!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
 	<script>
@@ -70,6 +67,7 @@
 	<!-- build:js({.tmp,app}) scripts/scripts.js -->
 	<script src="scripts/mobile_app.js"></script>
 	<script src="scripts/factories/http.js"></script>
+	<script src="scripts/controllers/head.js"></script>
 	<script src="scripts/controllers/mobile/header.js"></script>
 	<script src="scripts/controllers/mobile/films.js"></script>
 	<script src="scripts/controllers/mobile/film.js"></script>
