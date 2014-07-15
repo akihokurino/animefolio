@@ -13,13 +13,13 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: 5
-  username: akiho
-  password: akiho
-  socket: /var/lib/mysql/mysql.sock
 
 development:
   <<: *default
+  username: akiho
+  password: akiho
   database: animefolio_development
+  socket: /tmp/mysql.sock
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -27,6 +27,8 @@ development:
 test:
   <<: *default
   database: animefolio_test
+  username: root
+  password: root
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -54,3 +56,4 @@ production:
   #password: <%= ENV['ANIMEFOLIO_DATABASE_PASSWORD'] %>
   username: root
   password: root
+  socket: /var/lib/mysql/mysql.sock
