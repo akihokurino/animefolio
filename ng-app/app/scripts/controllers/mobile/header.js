@@ -30,6 +30,9 @@ angular.module("animefolio").controller("HeaderCtrl", function ($scope, $locatio
 			else if(type == "recent"){
 				$scope.title = "最近"
 			}
+			else if(type == "new"){
+				$scope.title = "最新"
+			}
 		}
 		else if(!letter && !type){
 			$scope.title = "すべて"
