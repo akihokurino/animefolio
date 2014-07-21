@@ -58,7 +58,7 @@ angular.module("animefolio").factory("http", ["$http", "$rootScope", "env", func
 				}
 			)
 		},
-		getPopularOrRecentFilms: function (scope_api, page_num, scope_status, pagenation, type) {
+		getPopularOrRecentOrNewFilms: function (scope_api, page_num, scope_status, pagenation, type) {
 			http(HOST + "/films?page_num=" + page_num + "&type=" + type, "GET", {},
 				function (data, status, headers, config) {
 					angular.forEach(data.films, function (film) {

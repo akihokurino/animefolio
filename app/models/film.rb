@@ -10,13 +10,13 @@ class Film < ActiveRecord::Base
 	}
 
 	class << self
-		def find_or_create(title, description, thumbnail, first_letter, popular, recent)
+		def find_or_create(title, description, thumbnail, first_letter, popular, recent, is_new)
 			unless self.exists?(title: title)
-				self.create!(title: title, description: description, thumbnail: thumbnail, first_letter: first_letter, popular: popular, recent: recent)
+				self.create!(title: title, description: description, thumbnail: thumbnail, first_letter: first_letter, popular: popular, recent: recent, is_new: is_new)
 				film_id = self.last[:id]
 			else
 				film = self.find_by(title: title)
-				film.update(thumbnail: thumbnail, popular: popular, recent: recent)
+				film.update(thumbnail: thumbnail, popular: popular, recent: recent, is_new: is_new)
 				film_id = film[:id]
 			end
 		end
@@ -32,6 +32,8 @@ class Film < ActiveRecord::Base
 					self.where(popular: true).select(:id, :title, :thumbnail).pagenation(offset_num, get_num)
 				when "recent"
 					self.where(recent: true).select(:id, :title, :thumbnail).pagenation(offset_num, get_num)
+				when "new"
+					self.where(is_new: true).select(:id, :title, :thumbnail).pagenation(offset_num, get_num)
 				end
 			else
 				self.all.select(:id, :title, :thumbnail).pagenation(offset_num, get_num)

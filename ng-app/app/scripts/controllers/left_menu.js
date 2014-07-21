@@ -38,5 +38,10 @@ angular.module("animefolio").controller("LeftMenuCtrl", function ($scope, $locat
 		var type = $location.search().type;
 		return (type == "recent") ? "selected" : "";
 	}
+
+	$scope.isNew = function () {
+		var type = $location.search().type;
+		return (type == "new") ? "selected" : "";
+	}
 });
 

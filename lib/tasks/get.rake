@@ -1,8 +1,7 @@
 namespace :get do
  	desc "scraping from animepost"
-
-  	task :animepost => :environment do
-    	require 'open-uri'
+  task :animepost => :environment do
+	   require 'open-uri'
 		require 'nokogiri'
 		require 'kconv'
 
@@ -32,6 +31,33 @@ namespace :get do
 			recent_list
 		end
 
+		def newer(url)
+			new_list = []
+			html = open(url){ |f| f.read }
+			doc = Nokogiri::HTML.parse(html.toutf8, nil, "UTF-8")
+			doc.css(".sidemenu_body > dt").each do |node|
+				if node.children.text == "放送中のアニメ一覧"
+					node.next.next.css(".L2").each do |node|
+						tmp = {}
+						node.children.each do |node|
+							if node.name == "a"
+								tmp[:url] =  node.attributes["href"].value
+								tmp[:title] = node.children.text
+							end
+							if node.name == "span"
+								if node.attributes["class"].value == "Txt15"
+									tmp[:flag] = node.children.text
+								end
+							end
+						end
+						new_list << tmp
+					end
+				end
+			end
+
+			new_list
+		end
+
 		def crawl_hiragana(url, ranking_list, recent_list)
 			html = open(url){ |f| f.read }
 			doc = Nokogiri::HTML.parse(html.toutf8, nil, "UTF-8")
@@ -48,11 +74,11 @@ namespace :get do
 				title = node.text
 				popular = ranking_list.include?(title) ? true : false
 				recent = recent_list.include?(title) ? true : false
-				get_basic(node.attributes["href"].value, title, first_letter, popular, recent)
+				get_basic(node.attributes["href"].value, title, first_letter, popular, recent, false)
 			end
 		end
 
-		def get_basic(url, title, first_letter, popular, recent)
+		def get_basic(url, title, first_letter, popular, recent, is_new)
 			begin
 				html = open(url){ |f| f.read }
 			rescue Exception
@@ -79,10 +105,9 @@ namespace :get do
 				doc.css(".story img").each do |node|
 					thumbnail = thumbnail = node.attributes["src"].value if node.name == "img"
 				end
-
 			end
 
-			film_id = Film.find_or_create(title, description, thumbnail, first_letter, popular, recent)
+			film_id = Film.find_or_create(title, description, thumbnail, first_letter, popular, recent, is_new)
 			crawl_list(doc, film_id)
 		end
 
@@ -204,5 +229,17 @@ namespace :get do
 		ranking_list = ranking(url)
 		recent_list = recent(url)
 		crawl_hiragana(url, ranking_list, recent_list)
-  	end
+
+		new_list = newer(url)
+		new_list.each do |obj|
+			if obj[:flag] == "新"
+				if Film.exists?(title: obj[:title])
+					film = Film.find_by(title: obj[:title])
+					film.update(is_new: true)
+				else
+					get_basic(obj[:url], obj[:title], nil, false, true, true)
+				end
+			end
+		end
+  end
 end
