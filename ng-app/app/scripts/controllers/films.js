@@ -26,7 +26,7 @@ angular.module("animefolio").controller("FilmsCtrl", function ($scope, $location
  			http.searchFilms($scope.api, page_num, $scope.status, pagenation, keyword);
  		}
  		else if(type){
- 			http.getPopularOrRecentFilms($scope.api, page_num, $scope.status, pagenation, type)
+ 			http.getPopularOrRecentOrNewFilms($scope.api, page_num, $scope.status, pagenation, type)
  		}
  		else{
  			http.getFilms($scope.api, page_num, $scope.status, pagenation, letter);
@@ -47,7 +47,7 @@ angular.module("animefolio").controller("FilmsCtrl", function ($scope, $location
 	 			http.searchFilms($scope.api, page_num, $scope.status, pagenation, keyword);
 	 		}
 	 		else if(type){
-	 			http.getPopularOrRecentFilms($scope.api, page_num, $scope.status, pagenation, type)
+	 			http.getPopularOrRecentOrNewFilms($scope.api, page_num, $scope.status, pagenation, type)
 	 		}
 	 		else{
 	 			http.getFilms($scope.api, page_num, $scope.status, pagenation, letter);
