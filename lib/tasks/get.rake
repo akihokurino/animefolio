@@ -1,14 +1,15 @@
 namespace :get do
  	desc "scraping from animepost"
   task :animepost => :environment do
-	   require 'open-uri'
+	  require 'open-uri'
 		require 'nokogiri'
 		require 'kconv'
 
 		def ranking(url)
 			ranking_list = []
-			html = open(url){ |f| f.read }
-			doc = Nokogiri::HTML.parse(html.toutf8, nil, "UTF-8")
+			html         = open(url){ |f| f.read }
+			doc          = Nokogiri::HTML.parse(html.toutf8, nil, "UTF-8")
+
 			doc.css(".rank ul li a").each do |node|
 				ranking_list << node.children.text
 			end
@@ -18,8 +19,9 @@ namespace :get do
 
 		def recent(url)
 			recent_list = []
-			html = open(url){ |f| f.read }
-			doc = Nokogiri::HTML.parse(html.toutf8, nil, "UTF-8")
+			html        = open(url){ |f| f.read }
+			doc         = Nokogiri::HTML.parse(html.toutf8, nil, "UTF-8")
+
 			doc.css(".sidemenu_body > dt").each do |node|
 				if node.children.text == "放送中のアニメ一覧"
 					node.next.next.css(".L2 a").each do |node|
@@ -33,15 +35,16 @@ namespace :get do
 
 		def newer(url)
 			new_list = []
-			html = open(url){ |f| f.read }
-			doc = Nokogiri::HTML.parse(html.toutf8, nil, "UTF-8")
+			html     = open(url){ |f| f.read }
+			doc      = Nokogiri::HTML.parse(html.toutf8, nil, "UTF-8")
+
 			doc.css(".sidemenu_body > dt").each do |node|
 				if node.children.text == "放送中のアニメ一覧"
 					node.next.next.css(".L2").each do |node|
 						tmp = {}
 						node.children.each do |node|
 							if node.name == "a"
-								tmp[:url] =  node.attributes["href"].value
+								tmp[:url]   =  node.attributes["href"].value
 								tmp[:title] = node.children.text
 							end
 							if node.name == "span"
@@ -50,10 +53,7 @@ namespace :get do
 								end
 							end
 						end
-
-						if tmp[:flag] == "新"
-							new_list << tmp
-						end
+						new_list << tmp
 					end
 				end
 			end
@@ -63,7 +63,8 @@ namespace :get do
 
 		def crawl_hiragana(url, ranking_list, recent_list, new_list)
 			html = open(url){ |f| f.read }
-			doc = Nokogiri::HTML.parse(html.toutf8, nil, "UTF-8")
+			doc  = Nokogiri::HTML.parse(html.toutf8, nil, "UTF-8")
+
 			doc.css(".aniTtl .Ttl_btnA a").each do |node|
 				first_letter = node.text
 				crawl_title(node.attributes["href"].value, first_letter, ranking_list, recent_list, new_list)
@@ -72,17 +73,25 @@ namespace :get do
 
 		def crawl_title(url, first_letter, ranking_list, recent_list, new_list)
 			html = open(url){ |f| f.read }
-			doc = Nokogiri::HTML.parse(html.toutf8, nil, "UTF-8")
+			doc  = Nokogiri::HTML.parse(html.toutf8, nil, "UTF-8")
+
 			doc.css(".entry_body .sl_l a").each do |node|
-				title = node.text
+				title   = node.text
+
+				#ランキングのリストに含まれていたらtrue
 				popular = ranking_list.include?(title) ? true : false
-				recent = recent_list.include?(title) ? true : false
-				is_new = false
+
+				#最近のリストに含まれていたらtrue
+				recent  = recent_list.include?(title) ? true : false
+
+				#最近のリストかつ、最新のフラグが立っていればtrue
+				is_new  = false
 				new_list.each do |obj|
-					if obj[:title] == title
+					if obj[:title] == title && obj[:flag] == "新"
 						is_new = true
 					end
 				end
+
 				get_basic(node.attributes["href"].value, title, first_letter, popular, recent, is_new)
 			end
 		end
@@ -95,7 +104,7 @@ namespace :get do
 			end
 
 			description = nil
-			thumbnail = nil
+			thumbnail   = nil
 
 			doc = Nokogiri::HTML.parse(html.toutf8, nil, "UTF-8")
 			doc.css(".aniSto p.Txt2").each do |node|
@@ -112,7 +121,7 @@ namespace :get do
 					description = node.children.text
 				end
 				doc.css(".story img").each do |node|
-					thumbnail = thumbnail = node.attributes["src"].value if node.name == "img"
+					thumbnail = node.attributes["src"].value if node.name == "img"
 				end
 			end
 
@@ -122,6 +131,7 @@ namespace :get do
 
 		def crawl_list(doc, film_id)
 			exists_list = false
+
 			catch :double_loop do
 				doc.css("#more > div").each do |node|
 					if node.attributes["class"] && node.attributes["class"].value == "aniMov"
@@ -130,10 +140,11 @@ namespace :get do
 						end
 
 						exists_list = true
+
 						node.css(".Mov_cnt .Mov_lst .Mov_ttl a").each do |node|
-							url = node.attributes["href"].value
+							url  = node.attributes["href"].value
 							html = open(url){ |f| f.read }
-							doc = Nokogiri::HTML.parse(html.toutf8, nil, "UTF-8")
+							doc  = Nokogiri::HTML.parse(html.toutf8, nil, "UTF-8")
 							crawl_list(doc, film_id)
 						end
 
@@ -149,12 +160,12 @@ namespace :get do
 
 		def get_details(doc, film_id)
 			doc.css("#more > div").each do |node|
-				title = nil
+				title      = nil
 				content_id = nil
 
 				if node.attributes["class"] && node.attributes["class"].value == "aniTabA"
 					node.css(".Txt4").each do |node|
-						title = node.children.text
+						title      = node.children.text
 						content_id = Content.find_or_create(title, film_id)
 					end
 					node.css("ul#tab1 li a").each do |node|
@@ -164,7 +175,7 @@ namespace :get do
 				if node.attributes["class"] && node.attributes["class"].value == "aniTabB"
 					doc.css("#more > div.aniTabB > div").each_with_index do |node, index|
 						if node.attributes["class"] && node.attributes["class"].value == "Tab_hed"
-							title = node.children.children.text
+							title      = node.children.children.text
 							content_id = Content.find_or_create(title, film_id)
 						end
 
@@ -178,7 +189,7 @@ namespace :get do
 				if node.attributes["class"] && node.attributes["class"].value == "aniTabC"
 					doc.css("#more > div.aniTabC > div").each_with_index do |node, index|
 						if node.attributes["class"] && node.attributes["class"].value == "Tab_hed"
-							title = node.children.children.text
+							title      = node.children.children.text
 							content_id = Content.find_or_create(title, film_id)
 						end
 
@@ -192,7 +203,7 @@ namespace :get do
 				if node.attributes["class"] && node.attributes["class"].value == "aniTabD"
 					doc.css("#more > div.aniTabD").each_with_index do |node, index|
 						node.css("#movie").each do |node|
-							title = node.children.text
+							title      = node.children.text
 							content_id = Content.find_or_create(title, film_id)
 						end
 						node.css(".Tab_cnt ul li a").each do |node|
@@ -209,46 +220,61 @@ namespace :get do
 			case node.children.text
 			when /AUE/
 				title = node.children.text
-				url = node.attributes["href"].value
+				url   = node.attributes["href"].value
 			when "Trollvid"
 				title = node.children.text
-				url = node.attributes["href"].value
+				url   = node.attributes["href"].value
 			when "VFun"
 				title = node.children.text
-				url = node.attributes["href"].value
+				url   = node.attributes["href"].value
 			when "AniTube"
 				title = node.children.text
-				url = node.attributes["href"].value
+				url   = node.attributes["href"].value
 			when "MP4up"
 				title = node.children.text
-				url = node.attributes["href"].value
+				url   = node.attributes["href"].value
 			when "Hash"
 				title = node.children.text
-				url = node.attributes["href"].value
+				url   = node.attributes["href"].value
 			when "Zunux"
 				title = node.children.text
-				url = node.attributes["href"].value
+				url   = node.attributes["href"].value
 			end
 			if !title.nil? && !url.nil?
 				Link.create_or_update(content_id, title, url)
 			end
 		end
 
-		url = "http://animepost.blog.fc2.com"
+		url          = "http://animepost.blog.fc2.com"
+
+		#ランキングのタイトルのリストの取得
 		ranking_list = ranking(url)
-		recent_list = recent(url)
-		new_list = newer(url)
 
-		p new_list
+		#最近のタイトルのリストの取得
+		recent_list  = recent(url)
 
+		#最近のタイトルのリスト（最新かどうかのフラグ付き）の取得
+		new_list     = newer(url)
+
+		#ひらがなの部分からスクレイピング開始
 		crawl_hiragana(url, ranking_list, recent_list, new_list)
 
+
+		#最新のリストにはあるが、あいうえおフォルダの中にはない場合の最終チェック
 		new_list.each do |obj|
 			if Film.exists?(title: obj[:title])
 				film = Film.find_by(title: obj[:title])
-				film.update(is_new: true)
+				if obj[:flag] == "新"
+					film.update(is_new: true)
+				else
+					film.update(is_new: false)
+				end
 			else
-				get_basic(obj[:url], obj[:title], nil, false, true, true)
+				if obj[:flag] == "新"
+					get_basic(obj[:url], obj[:title], nil, false, true, true)
+				else
+					get_basic(obj[:url], obj[:title], nil, false, true, false)
+				end
 			end
 		end
   end
