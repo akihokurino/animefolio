@@ -50,7 +50,10 @@ namespace :get do
 								end
 							end
 						end
-						new_list << tmp
+
+						if tmp[:flag] == "新"
+							new_list << tmp
+						end
 					end
 				end
 			end
@@ -58,23 +61,29 @@ namespace :get do
 			new_list
 		end
 
-		def crawl_hiragana(url, ranking_list, recent_list)
+		def crawl_hiragana(url, ranking_list, recent_list, new_list)
 			html = open(url){ |f| f.read }
 			doc = Nokogiri::HTML.parse(html.toutf8, nil, "UTF-8")
 			doc.css(".aniTtl .Ttl_btnA a").each do |node|
 				first_letter = node.text
-				crawl_title(node.attributes["href"].value, first_letter, ranking_list, recent_list)
+				crawl_title(node.attributes["href"].value, first_letter, ranking_list, recent_list, new_list)
 			end
 		end
 
-		def crawl_title(url, first_letter, ranking_list, recent_list)
+		def crawl_title(url, first_letter, ranking_list, recent_list, new_list)
 			html = open(url){ |f| f.read }
 			doc = Nokogiri::HTML.parse(html.toutf8, nil, "UTF-8")
 			doc.css(".entry_body .sl_l a").each do |node|
 				title = node.text
 				popular = ranking_list.include?(title) ? true : false
 				recent = recent_list.include?(title) ? true : false
-				get_basic(node.attributes["href"].value, title, first_letter, popular, recent, false)
+				is_new = false
+				new_list.each do |obj|
+					if obj[:title] == title
+						is_new = true
+					end
+				end
+				get_basic(node.attributes["href"].value, title, first_letter, popular, recent, is_new)
 			end
 		end
 
@@ -228,17 +237,18 @@ namespace :get do
 		url = "http://animepost.blog.fc2.com"
 		ranking_list = ranking(url)
 		recent_list = recent(url)
-		crawl_hiragana(url, ranking_list, recent_list)
-
 		new_list = newer(url)
+
+		p new_list
+
+		crawl_hiragana(url, ranking_list, recent_list, new_list)
+
 		new_list.each do |obj|
-			if obj[:flag] == "新"
-				if Film.exists?(title: obj[:title])
-					film = Film.find_by(title: obj[:title])
-					film.update(is_new: true)
-				else
-					get_basic(obj[:url], obj[:title], nil, false, true, true)
-				end
+			if Film.exists?(title: obj[:title])
+				film = Film.find_by(title: obj[:title])
+				film.update(is_new: true)
+			else
+				get_basic(obj[:url], obj[:title], nil, false, true, true)
 			end
 		end
   end
