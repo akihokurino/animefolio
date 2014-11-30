@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140721081856) do
+ActiveRecord::Schema.define(version: 20141129173547) do
+
+  create_table "anime_maps", force: true do |t|
+    t.string   "week"
+    t.string   "title"
+    t.string   "now_episode"
+    t.string   "time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "contents", force: true do |t|
     t.integer  "film_id"

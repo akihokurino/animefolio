@@ -41,7 +41,7 @@ $main_color: #2980b9;
 * {
 	font-family: 'Helvetica Neue','Helvetica','ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ','Meiryo','ＭＳ Ｐゴシック',arial,sans-serif;
 	color: #444;
-	font-size: 14px;
+	font-size: 12px;
 	margin: 0px;
 	padding: 0px;
 	box-sizing: border-box;
@@ -73,9 +73,8 @@ header {
 	position: fixed;
 	z-index: 10;
 	.inner-header {
-		width: 100%;
+		width: 1250px;
 		height: 100%;
-		min-width: 1130px;
 		margin: 0 auto;
 		position: relative;
 		.search {
@@ -83,7 +82,6 @@ header {
 			overflow: hidden;
 			position: absolute;
 			top: 8px;
-			left: 10px;
 			input[type="text"] {
 				float: left;
 				@include input-text(200px, 30px);
@@ -110,33 +108,40 @@ header {
 .container {
 	width: 100%;
 	padding-top: 65px;
+	.inner-container {
+		width: 1250px;
+		margin: 0 auto;
+		position: relative;
+		overflow: hidden;
+	}
 	.films-page, .film-page, .content-page {
-		float: right;
-		margin: 0 0 0 -210px;
-		width: 100%;
+		width: 830px;
+		margin: 0 auto;
 		.inner-films-page, .inner-film-page, .inner-content-page {
-			margin: 0 0 0 220px;
-	    	.films-wrap {
-	    		overflow: hidden;
-	    		min-width: 760px;
+			padding-left: 0px;
+	    .films-wrap {
+	    	-webkit-column-count: 6;
+			  -moz-column-count: 6;
+			  column-count: 6;
 				.film {
 					display: inline-block;
 					margin-right: 10px;
 					margin-bottom: 10px;
-					width: 180px;
+					width: 130px;
 					box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
 					background-color: $film_color;
 					img {
-						width: 180px;
+						width: 130px;
 						display: block;
 					}
 					.title {
 						width: 100%;
-						padding: 10px;
+						padding: 5px;
+						font-size: 12px;
 					}
 				}
-	    	}
-	    	.loading {
+	    }
+	    .loading {
 				clear: both;
 				text-align: center;
 				img {
@@ -144,9 +149,7 @@ header {
 				}
 			}
 			.film-wrap, .content-wrap {
-	    		overflow: hidden;
-	    		max-width: 900px;
-	    		min-width: 760px;
+	    	overflow: hidden;
 				.basic {
 					overflow: hidden;
 					background-color: $film_color;
@@ -154,24 +157,20 @@ header {
 					box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
 					margin-bottom: 20px;
 					img {
-						width: 270px;
+						width: 250px;
 						display: block;
 						float: left;
+						margin-right: 10px;
 					}
 					.body {
-						width: 100%;
-						margin: 0 0 0 -270px;
-						float: right;
+						width: 500px;
+						float: left;
 						.title {
-							margin: 0 0 0 280px;
-							width: 580px;
-							font-size: 18px;
+							font-size: 14px;
 							margin-bottom: 20px;
 						}
 						.description {
-							margin: 0 0 0 280px;
-							width: 580px;
-							font-size: 16px;
+							font-size: 12px;
 							line-height: 22px;
 						}
 					}
@@ -245,7 +244,7 @@ header {
 						}
 					}
 				}
-	    	}
+	    }
 		}
 	}
 }
@@ -254,7 +253,7 @@ header {
 	width: 200px;
 	position: fixed;
 	z-index: 10;
-	left: 10px;
+	left: auto;
 	top: 64px;
     .hiragana-list {
     	width: 200px;
@@ -292,7 +291,7 @@ header {
 	height: 600px;
 	position: fixed;
 	z-index: 10;
-	right: 10px;
 	top: 64px;
+	margin-left: 1050px;
 	background-color: #fff;
 }

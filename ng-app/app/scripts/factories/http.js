@@ -34,7 +34,6 @@ angular.module("animefolio").factory("http", ["$http", "$rootScope", "env", func
 					if(data.films.length != 0){
 						$(window).bind("scroll", pagenation);
 					}
-
 				},
 				function (data, status, headers, config) {
 					console.log("error");
@@ -91,6 +90,16 @@ angular.module("animefolio").factory("http", ["$http", "$rootScope", "env", func
 				function (data, status, headers, config) {
 					scope_api.film = data.film;
 					scope_api.content = data.content;
+				},
+				function (data, status, headers, config) {
+					console.log("error");
+				}
+			)
+		},
+		getRecentList: function (scope_api) {
+			http(HOST + "/anime_maps", "GET", {},
+				function (data, status, headers, config) {
+					console.log(data);
 				},
 				function (data, status, headers, config) {
 					console.log("error");

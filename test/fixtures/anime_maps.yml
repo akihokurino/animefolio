@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  week: MyString
+  title: MyString
+  now_episode: MyString
+  time: MyString
+
+two:
+  week: MyString
+  title: MyString
+  now_episode: MyString
+  time: MyString
