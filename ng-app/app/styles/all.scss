@@ -279,7 +279,7 @@ header {
     		border: solid 1px #e2e2e2;
     	}
     	.selected {
-    		background-color: #ccc;
+    		background-color: $main_color;
     		color: #fff;
     	}
     }
@@ -288,10 +288,28 @@ header {
 .right-menu {
 	-webkit-overflow-scrolling: touch;
 	width: 200px;
-	height: 600px;
+	height: 88%;
+	overflow-y: scroll;
 	position: fixed;
 	z-index: 10;
 	top: 64px;
 	margin-left: 1050px;
 	background-color: #fff;
+	ul {
+    width: 200px;
+    margin: 0 auto;
+    background-color: #fff;
+    overflow: hidden;
+    li {
+    	display: block;
+    	width: 100%;
+    	padding: 5px;
+    	text-align: center;
+    	border: solid 1px #e2e2e2;
+    	&.week {
+    		background-color: $main_color;
+    		color: #fff;
+    	}
+    }
+  }
 }

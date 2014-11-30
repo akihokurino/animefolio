@@ -10,7 +10,7 @@
 
 angular.module("animefolio").controller("FilmCtrl", function ($scope, $location, http) {
 	$scope.api = {
-		film: null
+		film: null,
 	};
 
  	$scope.initialize = function () {

@@ -99,7 +99,33 @@ angular.module("animefolio").factory("http", ["$http", "$rootScope", "env", func
 		getRecentList: function (scope_api) {
 			http(HOST + "/anime_maps", "GET", {},
 				function (data, status, headers, config) {
-					console.log(data);
+					angular.forEach(data.result, function (anime) {
+						switch (anime.week) {
+							case "日":
+								scope_api.sunday_map.push(anime);
+								break;
+							case "月":
+								scope_api.monday_map.push(anime);
+								break;
+							case "火":
+								scope_api.tuesday_map.push(anime);
+								break;
+							case "水":
+								scope_api.wednesday_map.push(anime);
+								break;
+							case "木":
+								scope_api.thursday_map.push(anime);
+								break;
+							case "金":
+								scope_api.friday_map.push(anime);
+								break;
+							case "土":
+								scope_api.saturday_map.push(anime);
+								break;
+						}
+					})
+
+					console.log(scope_api)
 				},
 				function (data, status, headers, config) {
 					console.log("error");
