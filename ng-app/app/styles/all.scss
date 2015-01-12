@@ -118,21 +118,25 @@ header {
 		width: 830px;
 		margin: 0 auto;
 		.inner-films-page, .inner-film-page, .inner-content-page {
-			padding-left: 0px;
+			padding-left: 5px;
 	    .films-wrap {
-	    	-webkit-column-count: 6;
-			  -moz-column-count: 6;
-			  column-count: 6;
 				.film {
 					display: inline-block;
 					margin-right: 10px;
 					margin-bottom: 10px;
-					width: 130px;
+					width: 402px;
 					box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
 					background-color: $film_color;
-					img {
-						width: 130px;
-						display: block;
+					position: relative;
+					padding-left: 20px;
+					.badge {
+						background-color: $main_color;
+						width: 5px;
+						height: 100%;
+						display: inline-block;
+						position: absolute;
+						top: 0px;
+						left: 0px;
 					}
 					.title {
 						width: 100%;
@@ -149,6 +153,7 @@ header {
 				}
 			}
 			.film-wrap, .content-wrap {
+				width: 820px;
 	    	overflow: hidden;
 				.basic {
 					overflow: hidden;
@@ -223,8 +228,31 @@ header {
 						left: 0px;
 					}
 				}
-				.link-list {
+				.link-list, .text-link-list {
 					padding-bottom: 40px;
+					.list-title {
+						width: 645px;
+						margin: 0 auto;
+						padding-top: 5px;
+						padding-bottom: 5px;
+						font-weight: normal;
+						box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
+						background-color: $film_color;
+						font-size: 16px;
+						margin-bottom: 10px;
+						padding-left: 20px;
+						position: relative;
+						color: $main_color;
+						.badge {
+							background-color: $main_color;
+							width: 5px;
+							height: 100%;
+							display: inline-block;
+							position: absolute;
+							top: 0px;
+							left: 0px;
+						}
+					}
 					li {
 						a {
 							display: block;

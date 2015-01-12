@@ -11,19 +11,20 @@
 angular.module("animefolio").controller("LeftMenuCtrl", function ($scope, $location) {
 	$scope.isSelected = function (this_letter) {
 		var letter = $location.search().letter;
-		if(this_letter == letter){
+		if (this_letter == letter) {
 			return "selected";
 		}
 	}
 
 	$scope.isDefault = function () {
-		var letter = $location.search().letter;
+		var letter  = $location.search().letter;
 		var keyword = $location.search().keyword;
-		var type = $location.search().type;
-		if(!letter && !keyword && !type) {
+		var type    = $location.search().type;
+
+		if (!letter && !keyword && !type) {
 			var url_array = $location.path().split("/");
-			var page = url_array[1];
-			if(page == ""){
+			var page      = url_array[1];
+			if (page == "") {
 				return "selected";
 			}
 		}

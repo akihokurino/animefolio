@@ -11,9 +11,9 @@ class FilmsController < ApplicationController
 
 	private
 	def pagenation
-		page_num = params[:page_num].to_i
+		page_num    = params[:page_num].to_i
 		return if page_num < 0
-		@get_num = 20
+		@get_num    = 40
 		@offset_num = (page_num - 1) * @get_num
 	end
 end

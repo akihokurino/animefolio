@@ -19,8 +19,8 @@ angular.module("animefolio").controller("FilmCtrl", function ($scope, $location,
  	}
 
  	$scope.strimWidth = function (str, max) {
- 		if(str && str.length > parseInt(max)){
-			str = str.slice(0, parseInt(max));
+ 		if (str && str.length > parseInt(max)) {
+			str  = str.slice(0, parseInt(max));
 			str += "...";
 			return str;
 		}

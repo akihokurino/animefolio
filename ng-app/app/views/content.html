@@ -4,7 +4,8 @@
 		<div class="inner-content-page">
 			<div class="content-wrap">
 				<div class="basic">
-					<img ng-src="{{api.film.thumbnail}}">
+					<img ng-if="film.thumbnail" ng-src="{{api.film.thumbnail}}">
+					<img ng-if="!film.thumbnail" ng-src="../images/noimage.jpg" />
 					<div class="body">
 						<h2 class="title">{{api.film.title}}</h2>
 						<p class="description">{{api.film.description}}</p>
@@ -12,11 +13,16 @@
 				</div>
 				<h3><span class="badge"></span>{{api.content.title}}</h3>
 				<ul class="link-list">
-					<li ng-repeat="link in api.content.links track by $index">
+					<li ng-repeat="link in api.iframe_links track by $index">
+						<iframe ng-src="{{appendUrl(link.url)}}"></iframe>
+					</li>
+				</ul>
+				<ul class="text-link-list">
+					<p class="list-title"><span class="badge"></span>その他の動画リンク</p>
+					<li ng-repeat="link in api.text_links track by $index">
 						<a target="_blank" href="{{link.url}}" class="link-title">
 							{{link.title}}
 						</a>
-						<iframe ng-src="{{appendUrl(link.url)}}" ng-if="link.title != 'MP4up'"></iframe>
 					</li>
 				</ul>
 			</div>

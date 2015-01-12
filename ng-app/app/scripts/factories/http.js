@@ -38,7 +38,7 @@ angular.module("animefolio").factory("http", ["$http", "$rootScope", "env", func
 				function (data, status, headers, config) {
 					console.log("error");
 				}
-			)
+			);
 		},
 		searchFilms: function (scope_api, page_num, scope_status, pagenation, keyword) {
 			http(HOST + "/films?page_num=" + page_num + "&keyword=" + keyword, "GET", {},
@@ -55,7 +55,7 @@ angular.module("animefolio").factory("http", ["$http", "$rootScope", "env", func
 				function (data, status, headers, config) {
 					console.log("error");
 				}
-			)
+			);
 		},
 		getPopularOrRecentOrNewFilms: function (scope_api, page_num, scope_status, pagenation, type) {
 			http(HOST + "/films?page_num=" + page_num + "&type=" + type, "GET", {},
@@ -72,7 +72,7 @@ angular.module("animefolio").factory("http", ["$http", "$rootScope", "env", func
 				function (data, status, headers, config) {
 					console.log("error");
 				}
-			)
+			);
 		},
 		getFilm: function (scope_api, film_id) {
 			http(HOST + "/films/" + film_id, "GET", {},
@@ -83,18 +83,30 @@ angular.module("animefolio").factory("http", ["$http", "$rootScope", "env", func
 				function (data, status, headers, config) {
 					console.log("error");
 				}
-			)
+			);
 		},
 		getContent: function (scope_api, content_id, film_id) {
 			http(HOST + "/contents/" + content_id + "?film_id=" + film_id, "GET", {},
 				function (data, status, headers, config) {
-					scope_api.film = data.film;
+					scope_api.film    = data.film;
 					scope_api.content = data.content;
+
+					angular.forEach(data.content.links, function (link) {
+						switch (link.title) {
+							case "MP4up":
+							case "AniTube":
+								scope_api.text_links.push(link);
+								break;
+							default:
+								scope_api.iframe_links.push(link);
+								break;
+						}
+					});
 				},
 				function (data, status, headers, config) {
 					console.log("error");
 				}
-			)
+			);
 		},
 		getRecentList: function (scope_api) {
 			http(HOST + "/anime_maps", "GET", {},
@@ -123,14 +135,12 @@ angular.module("animefolio").factory("http", ["$http", "$rootScope", "env", func
 								scope_api.saturday_map.push(anime);
 								break;
 						}
-					})
-
-					console.log(scope_api)
+					});
 				},
 				function (data, status, headers, config) {
 					console.log("error");
 				}
-			)
+			);
 		}
 	}
-}])
+}]);

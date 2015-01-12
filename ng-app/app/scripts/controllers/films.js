@@ -17,15 +17,15 @@ angular.module("animefolio").controller("FilmsCtrl", function ($scope, $location
 
  	$scope.initialize = function () {
  		$scope.status.loading = true;
- 		page_num = 1;
- 		var letter = $location.search().letter;
- 		var keyword = $location.search().keyword;
- 		var type = $location.search().type;
+ 		page_num              = 1;
+ 		var letter            = $location.search().letter;
+ 		var keyword           = $location.search().keyword;
+ 		var type              = $location.search().type;
 
- 		if(keyword){
+ 		if (keyword) {
  			http.searchFilms($scope.api, page_num, $scope.status, pagenation, keyword);
  		}
- 		else if(type){
+ 		else if (type) {
  			http.getPopularOrRecentOrNewFilms($scope.api, page_num, $scope.status, pagenation, type)
  		}
  		else{
@@ -34,19 +34,19 @@ angular.module("animefolio").controller("FilmsCtrl", function ($scope, $location
  	}
 
  	function pagenation(){
-		var scrollHeight = $(document).height();
+		var scrollHeight   = $(document).height();
 		var scrollPosition = $(window).height() + $(window).scrollTop();
-		if((scrollHeight - scrollPosition) / scrollHeight <= 0.1){
+		if ((scrollHeight - scrollPosition) / scrollHeight <= 0.1) {
 			$scope.status.loading = true;
 			$(window).unbind("scroll");
-			page_num += 1;
-			var letter = $location.search().letter;
+			page_num   += 1;
+			var letter  = $location.search().letter;
 			var keyword = $location.search().keyword;
-			var type = $location.search().type;
-      if(keyword){
+			var type    = $location.search().type;
+      if (keyword) {
 	 			http.searchFilms($scope.api, page_num, $scope.status, pagenation, keyword);
 	 		}
-	 		else if(type){
+	 		else if (type) {
 	 			http.getPopularOrRecentOrNewFilms($scope.api, page_num, $scope.status, pagenation, type)
 	 		}
 	 		else{
